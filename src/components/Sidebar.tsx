@@ -137,6 +137,12 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
                     {showLabels && item.badge != null && (
                       <span style={{ background: "#7c3aed", color: "#fff", fontSize: 10, fontWeight: 700, padding: "0 5px", borderRadius: 99, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>{item.badge}</span>
                     )}
+                    {/* Tooltip for collapsed sidebar */}
+                    {!showLabels && (
+                      <span className="absolute left-full ml-2 px-2.5 py-1.5 bg-[#1e1b4b] text-white text-[11px] font-semibold rounded-md whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-none z-[100]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}>
+                        {item.label}
+                      </span>
+                    )}
                   </div>
                 );
               })}

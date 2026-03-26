@@ -24,6 +24,9 @@ import AlleLigen from "@/components/screens/AlleLigen";
 import AlleMannschaften from "@/components/screens/AlleMannschaften";
 import Vereine from "@/components/screens/Vereine";
 import Veranstaltungen from "@/components/screens/Veranstaltungen";
+import Kontakte from "@/components/screens/Kontakte";
+import Kalender from "@/components/screens/Kalender";
+import Strafen from "@/components/screens/Strafen";
 import HelpPanel from "@/components/HelpPanel";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
@@ -366,25 +369,26 @@ export default function App() {
           <img src="/beau-logo.svg" alt="beauOS" className="w-[120px] h-auto object-contain" style={{ filter: "brightness(0) invert(1)" }} />
         </div>
 
-        {/* Right: Search (desktop), icons, New, avatar */}
+        {/* Right: Search, icons with tooltips, New, avatar */}
         <div className="flex items-center gap-1.5 md:gap-3 shrink-0">
-          <div className="hidden lg:flex items-center gap-1.5 border border-white/20 rounded-md px-3 h-[34px]" style={{ width: 180 }}>
-            <span className="text-white/50 text-[13px] flex-1">Search</span>
+          {/* Search bar - functional */}
+          <div className="hidden lg:flex items-center gap-1.5 border border-white/20 rounded-md px-3 h-[34px] focus-within:border-white/40 transition-colors cursor-text" style={{ width: 200 }} onClick={e => { const inp = e.currentTarget.querySelector("input"); inp?.focus(); }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+            <input placeholder="Suchen..." className="bg-transparent border-0 outline-none text-white text-[13px] w-full placeholder:text-white/40" style={{ fontFamily: "inherit" }} />
           </div>
           {/* Search icon on mobile */}
-          <button className="lg:hidden p-1 bg-transparent border-0 cursor-pointer">
+          <button className="lg:hidden p-1 bg-transparent border-0 cursor-pointer" title="Suche">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
           </button>
           <div className="hidden md:flex items-center gap-0.5">
-            <button className="p-1 bg-transparent border-0 cursor-pointer">
+            <button className="p-1 bg-transparent border-0 cursor-pointer hover:bg-white/10 rounded transition-colors" title="Darstellung">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
             </button>
-            <button className="p-1 bg-transparent border-0 cursor-pointer relative">
+            <button className="p-1 bg-transparent border-0 cursor-pointer hover:bg-white/10 rounded transition-colors relative" title="Benachrichtigungen" onClick={() => setScreen("mail")}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /><path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
               <div style={{ position: "absolute", top: 2, right: 2, width: 7, height: 7, borderRadius: "50%", background: "#ef4444", border: "2px solid #15153a" }} />
             </button>
-            <button className="p-1 bg-transparent border-0 cursor-pointer">
+            <button className="p-1 bg-transparent border-0 cursor-pointer hover:bg-white/10 rounded transition-colors" title="Apps & Schnellzugriff">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"><circle cx="7" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><circle cx="17" cy="17" r="3" /></svg>
             </button>
           </div>
@@ -393,6 +397,7 @@ export default function App() {
             className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-medium text-white cursor-pointer shrink-0"
             style={{ background: "#794dff" }}
             onClick={() => setRoleModal(true)}
+            title="Rolle wechseln"
           >
             {config.initials}
           </div>
@@ -426,9 +431,9 @@ export default function App() {
           {screen === "nominierung" && <Nominierung />}
           {screen === "passkontrolle" && <Passkontrolle />}
           {screen === "mail" && <EmptyScreen title="Mail" subtitle="Posteingang und Nachrichten" icon="mail" />}
-          {screen === "kalender" && <EmptyScreen title="Kalender" subtitle="Saison- und Spieltermine" icon="calendar" />}
-          {screen === "kontakte" && <EmptyScreen title="Kontakte" subtitle="Vereine, Staffelleiter und Ansprechpartner" icon="users" />}
-          {screen === "strafen" && <EmptyScreen title="Strafen" subtitle="Ordnungsstrafen und Strafbescheide" icon="alert" />}
+          {screen === "kalender" && <Kalender />}
+          {screen === "kontakte" && <Kontakte />}
+          {screen === "strafen" && <Strafen />}
         </div>
       </div>
 
