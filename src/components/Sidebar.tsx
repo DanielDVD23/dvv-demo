@@ -32,6 +32,12 @@ function NavIcon({ type }: { type: string }) {
     star: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>,
     info: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="16" x2="12" y2="12" /><line x1="12" y1="8" x2="12.01" y2="8" /></svg>,
     "book-open": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></svg>,
+    "calendar-star": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M12 13l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3z" /></svg>,
+    "pie-chart": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83" /><path d="M22 12A10 10 0 0 0 12 2v10z" /></svg>,
+    shield: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>,
+    "calendar-edit": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M15 13.5l-4.5 4.5L9 18l.5-1.5 4.5-4.5a.7.7 0 0 1 1 1z" /></svg>,
+    "calendar-home": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M9 19v-3h6v3M12 13l-4 3h8z" /></svg>,
+    "org-tree": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" /><rect x="2" y="18" width="6" height="4" rx="1" /><rect x="16" y="18" width="6" height="4" rx="1" /><path d="M12 6v4M12 10H5v8M12 10h7v8" /></svg>,
   };
   return icons[type] || null;
 }
@@ -99,10 +105,12 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
         {/* Nav items */}
         <div style={{ flex: 1, overflowY: "auto", paddingTop: 12, paddingBottom: 8 }}>
           {navSections.map((section, si) => (
-            <div key={section.label}>
+            <div key={si}>
               {si > 0 && (
                 showLabels
-                  ? <div style={{ padding: "16px 16px 6px", fontSize: 10, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1.2, whiteSpace: "nowrap" }}>{section.label}</div>
+                  ? section.label
+                    ? <div style={{ padding: "16px 16px 6px", fontSize: 10, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1.2, whiteSpace: "nowrap" }}>{section.label}</div>
+                    : <div style={{ margin: "8px 12px", borderBottom: "1px solid #e8e5f0" }} />
                   : <div style={{ margin: "8px 12px", borderBottom: "1px solid #e8e5f0" }} />
               )}
               {section.items.map((item) => {
@@ -110,7 +118,8 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
                 return (
                   <div
                     key={item.id}
-                    className="cursor-pointer"
+                    className="cursor-pointer group relative"
+                    title={!showLabels ? item.label : undefined}
                     onClick={() => { onNavigate(item.id); if (isMobile && onMobileClose) onMobileClose(); }}
                     style={{
                       display: "flex", alignItems: "center", gap: 10,

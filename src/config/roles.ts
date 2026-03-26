@@ -11,24 +11,29 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     defaultScreen: "dashboard",
     navSections: [
       {
-        label: "Übersicht",
+        label: "",
         items: [
           { id: "dashboard", label: "Dashboard", badge: 5, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
-        label: "Verwaltung",
+        label: "Spielbetrieb",
         items: [
           { id: "ligen", label: "Meine Ligen", icon: "star" },
-          { id: "alle-ligen", label: "Alle Ligen", icon: "bar-chart" },
-          { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
-          { id: "spieltag", label: "Spieltagsplanung", badge: 2, icon: "calendar" },
-          { id: "heimspieltermine", label: "Heimspieltermine", icon: "home" },
-          { id: "statistik", label: "Statistiken", icon: "bar-chart" },
-          { id: "veranstaltungen", label: "Veranstaltungen", icon: "trophy" },
+          { id: "spieltag", label: "Spieltagsplanung", badge: 2, icon: "calendar-edit" },
+          { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
+          { id: "veranstaltungen", label: "Veranstaltungen", icon: "calendar-star" },
+        ],
+      },
+      {
+        label: "Stammdaten",
+        items: [
+          { id: "alle-ligen", label: "Ligen", icon: "org-tree" },
+          { id: "alle-mannschaften", label: "Mannschaften", icon: "users" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "statistik", label: "Statistiken", icon: "pie-chart" },
         ],
       },
       {
@@ -44,8 +49,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       kalender: ["NWVV", "Kalender"],
       kontakte: ["NWVV", "Kontakte"],
       ligen: ["NWVV", "Meine Ligen"],
-      "alle-ligen": ["NWVV", "Alle Ligen"],
-      "alle-mannschaften": ["NWVV", "Alle Mannschaften"],
+      "alle-ligen": ["NWVV", "Ligen"],
+      "alle-mannschaften": ["NWVV", "Mannschaften"],
       spieltag: ["NWVV", "Spieltagsplanung"],
       heimspieltermine: ["NWVV", "Heimspieltermine"],
       statistik: ["NWVV", "Statistiken"],
@@ -72,23 +77,28 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     defaultScreen: "dashboard",
     navSections: [
       {
-        label: "Übersicht",
+        label: "",
         items: [
           { id: "dashboard", label: "Dashboard", badge: 3, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
-        label: "Verwaltung",
+        label: "Mein Verein",
         items: [
           { id: "mannschaften", label: "Meine Teams", icon: "users" },
-          { id: "alle-ligen", label: "Alle Ligen", icon: "bar-chart" },
-          { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
-          { id: "spieltag", label: "Spieltagsplanung", icon: "calendar" },
-          { id: "heimspieltermine", label: "Heimspieltermine", icon: "home" },
-          { id: "statistik", label: "Statistiken", icon: "bar-chart" },
+          { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
+          { id: "spieltag", label: "Spieltagsplanung", icon: "calendar-edit" },
+        ],
+      },
+      {
+        label: "Stammdaten",
+        items: [
+          { id: "alle-ligen", label: "Ligen", icon: "org-tree" },
+          { id: "alle-mannschaften", label: "Mannschaften", icon: "users" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "statistik", label: "Statistiken", icon: "pie-chart" },
         ],
       },
       {
@@ -104,8 +114,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       kalender: ["TSV Hannover", "Kalender"],
       kontakte: ["TSV Hannover", "Kontakte"],
       mannschaften: ["TSV Hannover", "Meine Teams"],
-      "alle-ligen": ["TSV Hannover", "Alle Ligen"],
-      "alle-mannschaften": ["TSV Hannover", "Alle Mannschaften"],
+      "alle-ligen": ["TSV Hannover", "Ligen"],
+      "alle-mannschaften": ["TSV Hannover", "Mannschaften"],
       spieltag: ["TSV Hannover", "Spieltagsplanung"],
       heimspieltermine: ["TSV Hannover", "Heimspieltermine"],
       statistik: ["TSV Hannover", "Statistiken"],
@@ -130,23 +140,28 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     defaultScreen: "dashboard",
     navSections: [
       {
-        label: "Übersicht",
+        label: "",
         items: [
           { id: "dashboard", label: "Dashboard", badge: 8, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
-        label: "Verwaltung",
+        label: "Spielbetrieb",
         items: [
-          { id: "alle-ligen", label: "Alle Ligen", icon: "bar-chart" },
-          { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
-          { id: "spieltag", label: "Spieltagsplanung", badge: 2, icon: "calendar" },
-          { id: "heimspieltermine", label: "Heimspieltermine", icon: "home" },
-          { id: "statistik", label: "Statistiken", icon: "bar-chart" },
-          { id: "veranstaltungen", label: "Veranstaltungen", icon: "trophy" },
+          { id: "spieltag", label: "Spieltagsplanung", badge: 2, icon: "calendar-edit" },
+          { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
+          { id: "veranstaltungen", label: "Veranstaltungen", icon: "calendar-star" },
+        ],
+      },
+      {
+        label: "Stammdaten",
+        items: [
+          { id: "alle-ligen", label: "Ligen", icon: "org-tree" },
+          { id: "alle-mannschaften", label: "Mannschaften", icon: "users" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "statistik", label: "Statistiken", icon: "pie-chart" },
         ],
       },
       {
@@ -161,8 +176,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       mail: ["NWVV", "Mail"],
       kalender: ["NWVV", "Kalender"],
       kontakte: ["NWVV", "Kontakte"],
-      "alle-ligen": ["NWVV", "Alle Ligen"],
-      "alle-mannschaften": ["NWVV", "Alle Mannschaften"],
+      "alle-ligen": ["NWVV", "Ligen"],
+      "alle-mannschaften": ["NWVV", "Mannschaften"],
       spieltag: ["NWVV", "Spieltagsplanung"],
       heimspieltermine: ["NWVV", "Heimspieltermine"],
       statistik: ["NWVV", "Statistiken"],
