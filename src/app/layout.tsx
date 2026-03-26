@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "beauOS – NWVV Admin",
   description: "Volleyball-Verbandsverwaltung für den NWVV",
-  icons: { icon: "/favicon.png" },
+  icons: { icon: "/favicon.svg" },
 };
 
 export default function RootLayout({
