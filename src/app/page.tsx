@@ -363,7 +363,7 @@ export default function App() {
 
         {/* Center: beauOS logo */}
         <div className="flex-1 flex justify-center items-center">
-          <img src="/beau-logo.svg" alt="beauOS" className="h-5 object-contain" style={{ filter: "brightness(0) invert(1)" }} />
+          <img src="/beau-logo.svg" alt="beauOS" className="w-[120px] h-auto object-contain" style={{ filter: "brightness(0) invert(1)" }} />
         </div>
 
         {/* Right: Search (desktop), icons, New, avatar */}
