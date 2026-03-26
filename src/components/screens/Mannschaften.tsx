@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Modal from "@/components/ui/Modal";
 import Icon from "@/components/ui/Icon";
+import FilterBar from "@/components/ui/FilterBar";
 
 interface MannschaftenProps {
   onNavigate: (screen: string) => void;
@@ -80,34 +81,18 @@ export default function Mannschaften({ onNavigate, action, onActionHandled }: Ma
         </div>
       </div>
 
-      {/* Filters – full width, single row */}
-      <div className="flex gap-2 items-center mb-4 flex-wrap">
-        <div className="relative flex-1 min-w-[180px]">
-          <input placeholder="Mannschaft suchen..." className="!pl-9 !w-full" />
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-        </div>
-        <div style={{ width: 1, height: 20, background: "#e8e5f0", flexShrink: 0 }} />
-        {[
-          { val: filterLiga, set: setFilterLiga, label: "Liga", opts: ["Verbandsliga", "Bezirksliga", "Kreisliga", "Seniorenliga"] },
-          { val: filterGeschlecht, set: setFilterGeschlecht, label: "Geschlecht", opts: ["Herren", "Damen"] },
-          { val: filterAlter, set: setFilterAlter, label: "Altersklasse", opts: ["Erwachsene", "U20", "U18", "U16", "Senioren"] },
-          { val: filterStatus, set: setFilterStatus, label: "Status", opts: ["Aktiv", "Meldung offen", "Inaktiv"] },
-        ].map(f => (
-          <select
-            key={f.label}
-            value={f.val}
-            onChange={(e) => f.set(e.target.value)}
-            style={{ width: "auto", height: 36, padding: "0 28px 0 10px", borderRadius: 99, fontSize: 12, fontWeight: f.val !== "Alle" ? 600 : 400, background: f.val !== "Alle" ? "rgba(124,58,237,0.06)" : "#fff", color: f.val !== "Alle" ? "#7c3aed" : "#475569", borderColor: f.val !== "Alle" ? "rgba(124,58,237,0.18)" : "#e8e5f0" }}
-          >
-            <option value="Alle">{f.label}</option>
-            {f.opts.map(o => <option key={o}>{o}</option>)}
-          </select>
-        ))}
-        {(filterLiga !== "Alle" || filterGeschlecht !== "Alle" || filterAlter !== "Alle" || filterStatus !== "Alle") && (
-          <Button variant="ghost" size="sm" onClick={() => { setFilterLiga("Alle"); setFilterGeschlecht("Alle"); setFilterAlter("Alle"); setFilterStatus("Alle"); }}>Zurücksetzen</Button>
-        )}
+      <FilterBar
+        search="" onSearch={() => {}} searchPlaceholder="Mannschaft suchen..."
+        filters={[
+          { label: "Liga", value: "liga", options: ["Verbandsliga", "Bezirksliga", "Kreisliga", "Seniorenliga"], active: filterLiga, onChange: setFilterLiga },
+          { label: "Geschlecht", value: "geschlecht", options: ["Herren", "Damen"], active: filterGeschlecht, onChange: setFilterGeschlecht },
+          { label: "Altersklasse", value: "alter", options: ["Erwachsene", "U20", "U18", "U16", "Senioren"], active: filterAlter, onChange: setFilterAlter },
+          { label: "Status", value: "status", options: ["Aktiv", "Meldung offen", "Inaktiv"], active: filterStatus, onChange: setFilterStatus },
+        ]}
+        onReset={() => { setFilterLiga("Alle"); setFilterGeschlecht("Alle"); setFilterAlter("Alle"); setFilterStatus("Alle"); }}
+      >
         <span className="ml-auto text-xs text-text-muted whitespace-nowrap">{filtered.length} von {teams.length} Teams</span>
-      </div>
+      </FilterBar>
 
       {/* Table */}
       <div className="bg-s1 border border-border rounded-[10px] overflow-hidden">

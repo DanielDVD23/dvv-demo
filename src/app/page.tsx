@@ -374,7 +374,7 @@ export default function App() {
           {/* Search bar - functional */}
           <div className="hidden lg:flex items-center gap-1.5 border border-white/20 rounded-md px-3 h-[34px] focus-within:border-white/40 transition-colors cursor-text" style={{ width: 200 }} onClick={e => { const inp = e.currentTarget.querySelector("input"); inp?.focus(); }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-            <input placeholder="Suchen..." className="bg-transparent border-0 outline-none text-white text-[13px] w-full placeholder:text-white/40" style={{ fontFamily: "inherit" }} />
+            <input placeholder="Suchen..." className="!bg-transparent !border-0 !outline-none !text-white !text-[13px] !w-full !h-auto !p-0 placeholder:!text-white/40" style={{ fontFamily: "inherit" }} />
           </div>
           {/* Search icon on mobile */}
           <button className="lg:hidden p-1 bg-transparent border-0 cursor-pointer" title="Suche">

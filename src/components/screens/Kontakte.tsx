@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
+import FilterBar from "@/components/ui/FilterBar";
 
 const kontakte = [
   { name: "Stefan Meier", funktion: "Staffelleiter", bereich: "Verbandsliga Nord Herren", verein: "NWVV", email: "s.meier@nwvv.de", tel: "0511 1234-101", status: "aktiv" },
@@ -42,24 +43,14 @@ export default function Kontakte() {
         <p className="text-[13px] text-text-muted">Funktionäre, Staffelleiter und Vereinsansprechpartner</p>
       </div>
 
-      {/* Filters */}
-      <div className="flex gap-2 items-center mb-4 flex-wrap">
-        <div className="flex items-center gap-1.5 border border-border rounded-md px-2.5 h-[36px] bg-s1 flex-1 max-w-[280px]">
-          <Icon name="search" size={14} className="text-text-muted" />
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Name, Funktion oder Verein..." className="!border-0 !p-0 !h-auto text-[12.5px] !bg-transparent" />
-        </div>
-        <select value={filterFunktion} onChange={e => setFilterFunktion(e.target.value)} className="!h-[36px] !text-[12px] !rounded-full !px-3" style={{ width: "auto" }}>
-          <option value="">Alle Funktionen</option>
-          {funktionen.map(f => <option key={f} value={f}>{f}</option>)}
-        </select>
-        <select value={filterVerein} onChange={e => setFilterVerein(e.target.value)} className="!h-[36px] !text-[12px] !rounded-full !px-3" style={{ width: "auto" }}>
-          <option value="">Alle Vereine</option>
-          {vereine.map(v => <option key={v} value={v}>{v}</option>)}
-        </select>
-        {(filterFunktion || filterVerein) && (
-          <button onClick={() => { setFilterFunktion(""); setFilterVerein(""); }} className="text-[11px] text-accent font-semibold bg-transparent border-0 cursor-pointer">Zurücksetzen</button>
-        )}
-      </div>
+      <FilterBar
+        search={search} onSearch={setSearch} searchPlaceholder="Name, Funktion oder Verein..."
+        filters={[
+          { label: "Funktion", value: "funktion", options: funktionen, active: filterFunktion || "Alle", onChange: v => setFilterFunktion(v === "Alle" ? "" : v) },
+          { label: "Verein", value: "verein", options: vereine, active: filterVerein || "Alle", onChange: v => setFilterVerein(v === "Alle" ? "" : v) },
+        ]}
+        onReset={() => { setFilterFunktion(""); setFilterVerein(""); }}
+      />
 
       {/* Table */}
       <div className="bg-s1 border border-border rounded-[10px] overflow-hidden">

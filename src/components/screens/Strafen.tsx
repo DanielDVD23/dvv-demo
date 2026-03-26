@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
+import FilterBar from "@/components/ui/FilterBar";
 
 const strafen = [
   { id: "ST-2026-001", datum: "12.03.2026", verein: "TV Hannover", grund: "Nichtantritt Verbandsliga Spieltag 7", paragraph: "BSO §17.3", betrag: "150,00", status: "Offen" },
@@ -48,14 +49,12 @@ export default function Strafen() {
         </div>
       </div>
 
-      {/* Filter */}
-      <div className="flex gap-2 mb-4">
-        {["", "Offen", "Einspruch", "Bezahlt"].map(f => (
-          <button key={f} onClick={() => setFilter(f)} className={`px-3 py-1.5 rounded-full text-[11px] font-semibold border cursor-pointer transition-all ${filter === f ? "bg-accent text-white border-accent" : "bg-s1 text-text-dim border-border hover:bg-s2"}`}>
-            {f || "Alle"}
-          </button>
-        ))}
-      </div>
+      <FilterBar
+        filters={[
+          { label: "Status", value: "status", options: ["Offen", "Einspruch", "Bezahlt"], active: filter || "Alle", onChange: v => setFilter(v === "Alle" ? "" : v) },
+        ]}
+        onReset={() => setFilter("")}
+      />
 
       {/* Table */}
       <div className="bg-s1 border border-border rounded-[10px] overflow-hidden">
