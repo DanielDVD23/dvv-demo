@@ -86,7 +86,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
         items: [
           { id: "mannschaften", label: "Meine Mannschaften", icon: "users" },
           { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
-          { id: "spieltag", label: "Spielplan", icon: "calendar-edit" },
+          { id: "spielplan", label: "Spielplan", icon: "calendar-edit" },
         ],
       },
       {
@@ -112,7 +112,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       mannschaften: ["TSV Hannover", "Meine Mannschaften"],
       "alle-ligen": ["TSV Hannover", "Alle Ligen"],
       "alle-mannschaften": ["TSV Hannover", "Alle Mannschaften"],
-      spieltag: ["TSV Hannover", "Spielplan"],
+      spielplan: ["TSV Hannover", "Spielplan"],
       heimspieltermine: ["TSV Hannover", "Heimspieltermine"],
       statistik: ["TSV Hannover", "Statistiken"],
       rechnungen: ["TSV Hannover", "Rechnungen"],

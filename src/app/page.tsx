@@ -28,6 +28,7 @@ import Kontakte from "@/components/screens/Kontakte";
 import Kalender from "@/components/screens/Kalender";
 import Strafen from "@/components/screens/Strafen";
 import Mail from "@/components/screens/Mail";
+import Spielplan from "@/components/screens/Spielplan";
 import HelpPanel from "@/components/HelpPanel";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
@@ -415,7 +416,8 @@ export default function App() {
           {screen === "dashboard" && role === "clubadmin" && <ClubDashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "verbandsadmin" && <VerbandDashboard onNavigate={setScreen} />}
           {(screen === "ligen" || screen.startsWith("ligen:")) && <Ligen initialLiga={screen.startsWith("ligen:") ? screen.replace("ligen:", "") : undefined} />}
-          {(screen === "spieltag" || screen === "spielplan") && <Spieltag />}
+          {screen === "spieltag" && <Spieltag />}
+          {screen === "spielplan" && <Spielplan onNavigate={setScreen} />}
           {screen === "heimspieltermine" && <Heimspieltermine />}
           {(screen === "mannschaft" || screen === "spielermeldung") && <Mannschaft action={action} onActionHandled={() => setAction(null)} />}
           {screen === "mannschaften" && <Mannschaften onNavigate={setScreen} action={action} onActionHandled={() => setAction(null)} />}
