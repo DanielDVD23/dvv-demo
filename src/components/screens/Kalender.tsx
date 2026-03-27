@@ -146,82 +146,32 @@ export default function Kalender() {
   return (
     <div className="animate-fadeIn">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <h1 style={{ fontSize: 22, fontWeight: 700, color: "#3f404d" }}>
-          Spielplan
-        </h1>
-        <div className="flex items-center gap-1">
-          {(["Woche", "Tag", "Monat"] as ViewMode[]).map((v) => (
-            <button
-              key={v}
-              onClick={() => setView(v)}
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                padding: "6px 14px",
-                borderRadius: 6,
-                border: v === view ? "none" : "1px solid #e2e8f0",
-                background: v === view ? "#794dff" : "#fff",
-                color: v === view ? "#fff" : "#3f404d",
-                cursor: "pointer",
-              }}
-            >
-              {v}
-            </button>
-          ))}
+      <div className="flex items-start justify-between mb-6">
+        <div>
+          <h1 className="text-[22px] font-bold mb-1">Spielplan</h1>
+          <p className="text-[13px] text-text-muted">Wochenansicht · Alle Ligen</p>
         </div>
       </div>
 
-      {/* Navigation + Filters */}
+      {/* Navigation + View Toggle + Filters */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
         <div className="flex items-center gap-2">
-          <button
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "#794dff",
-              color: "#fff",
-              border: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              fontSize: 14,
-              fontWeight: 700,
-            }}
-          >
-            &lt;
-          </button>
-          <button
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "#794dff",
-              color: "#fff",
-              border: "none",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              fontSize: 14,
-              fontWeight: 700,
-            }}
-          >
-            &gt;
-          </button>
-          <div
-            style={{
-              background: "rgba(121,77,255,0.08)",
-              color: "#794dff",
-              fontWeight: 600,
-              fontSize: 13,
-              padding: "6px 14px",
-              borderRadius: 6,
-            }}
-          >
+          <button className="w-7 h-7 rounded-[6px] bg-accent text-white border-none flex items-center justify-center cursor-pointer text-[14px] font-bold">&lt;</button>
+          <button className="w-7 h-7 rounded-[6px] bg-accent text-white border-none flex items-center justify-center cursor-pointer text-[14px] font-bold">&gt;</button>
+          <div className="bg-accent-dim text-accent font-semibold text-[13px] px-3.5 py-1.5 rounded-[6px]">
             KW 13 &middot; 23. &ndash; 29. M&auml;rz 2026
+          </div>
+          <div className="flex items-center gap-1 ml-2">
+            {(["Woche", "Tag", "Monat"] as ViewMode[]).map((v) => (
+              <button
+                key={v}
+                onClick={() => setView(v)}
+                className={`text-[12px] font-semibold px-3 py-1.5 rounded-[6px] cursor-pointer border-none font-[inherit] ${v === view ? "bg-accent text-white" : "bg-s1 border border-border text-text-dim"}`}
+                style={v !== view ? { border: "1px solid var(--color-border, #e8e5f0)" } : {}}
+              >
+                {v}
+              </button>
+            ))}
           </div>
         </div>
 
