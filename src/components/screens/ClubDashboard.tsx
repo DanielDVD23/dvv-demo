@@ -12,10 +12,10 @@ interface ClubDashboardProps {
 }
 
 const INIT_TODOS = [
-  { id: "ct1", icon: "clipboard", title: "Spielermeldung ausstehend – Herren 2", meta: "Meldeschluss in 5 Tagen · BSO §6.10", priority: "urgent", action: "→ Melden", nav: "spielermeldung" },
-  { id: "ct2", icon: "refresh", title: "Vereinswechsel-Antrag – Lisa Schneider", meta: "Eingang 18.03.2026 · Wartezeit 3 Monate (BSO §8.3)", priority: "warning", action: "→ Prüfen", nav: "spielermeldung" },
-  { id: "ct3", icon: "edit-3", title: "Aufstellung fehlt – Spieltag 9 Herren 1", meta: "Spieltag 9 · Frist: 2 Tage vor Spieltag", priority: "warning", action: "→ Aufstellen", nav: "spielplan" },
-  { id: "ct4", icon: "coin", title: "Liga-Beitrag Verbandsliga – € 240,00", meta: "Fällig: 25.03.2026 · Noch nicht bezahlt", priority: "info", action: "→ Bezahlen", nav: "rechnungen" },
+  { id: "ct1", icon: "clipboard", title: "Spielermeldung ausstehend – Herren 2", meta: "Meldeschluss in 5 Tagen · BSO §6.10", priority: "urgent", action: "→ Melden", nav: "mannschaften" },
+  { id: "ct2", icon: "refresh", title: "Vereinswechsel-Antrag – Lisa Schneider", meta: "Eingang 18.03.2026 · Wartezeit 3 Monate (BSO §8.3)", priority: "warning", action: "→ Prüfen", nav: "mannschaften" },
+  { id: "ct3", icon: "calendar", title: "Aufstellung fehlt – Spieltag 9 Herren 1", meta: "Spieltag 9 · Frist: 2 Tage vor Spieltag", priority: "warning", action: "→ Aufstellen", nav: "spieltag" },
+  { id: "ct4", icon: "file", title: "Liga-Beitrag Verbandsliga – € 240,00", meta: "Fällig: 25.03.2026 · Noch nicht bezahlt", priority: "info", action: "→ Bezahlen", nav: "rechnungen" },
 ];
 
 const spiele = [

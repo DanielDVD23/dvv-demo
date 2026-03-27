@@ -27,9 +27,9 @@ const results = [
 ];
 
 const ligen = [
-  { name: "Verbandsliga Nord Herren", meta: "10 Mannschaften · Spieltag 8/22", borderColor: "border-l-green", badges: [{ text: "Laufend", color: "green" as const }, { text: "2 Ergebnisse offen", color: "orange" as const }] },
-  { name: "Bezirksliga Damen Staffel 1", meta: "8 Mannschaften · Spieltag 7/22", borderColor: "border-l-orange", badges: [{ text: "Laufend", color: "green" as const }, { text: "1 Konflikt", color: "red" as const }] },
-  { name: "Kreisliga Herren Hannover", meta: "12 Mannschaften · Spieltag 9/22", borderColor: "border-l-accent", badges: [{ text: "Laufend", color: "green" as const }] },
+  { id: "vbl-nord-herren", name: "Verbandsliga Nord Herren", meta: "10 Mannschaften · Spieltag 8/22", borderColor: "border-l-green", badges: [{ text: "Laufend", color: "green" as const }, { text: "2 Ergebnisse offen", color: "orange" as const }] },
+  { id: "bl-damen-1", name: "Bezirksliga Damen Staffel 1", meta: "8 Mannschaften · Spieltag 7/22", borderColor: "border-l-orange", badges: [{ text: "Laufend", color: "green" as const }, { text: "1 Konflikt", color: "red" as const }] },
+  { id: "kl-herren-hannover", name: "Kreisliga Herren Hannover", meta: "12 Mannschaften · Spieltag 9/22", borderColor: "border-l-accent", badges: [{ text: "Laufend", color: "green" as const }] },
 ];
 
 const priorityBorder = {
@@ -79,7 +79,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
       {/* KPIs */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
         <KpiCard label="Offene Rechnungen" value="3" sub="€ 1.240 ausstehend" color="red" onClick={() => onNavigate("rechnungen")} />
-        <KpiCard label="Spieltagsplanung" value="2" sub="Verlegungsanträge offen" color="orange" onClick={() => onNavigate("spieltag")} />
+        <KpiCard label="Ligenübersicht" value="2" sub="Verlegungsanträge offen" color="orange" onClick={() => onNavigate("spieltag")} />
         <KpiCard label="Ergebnisse" value="5" sub="zu bestätigen" color="purple" onClick={() => onNavigate("spieltag")} />
         <KpiCard label="Meldungen" value="18" sub="Mannschaften gemeldet" color="green" onClick={() => onNavigate("mannschaft")} />
       </div>
@@ -144,7 +144,7 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
             <div
               key={i}
               className={`bg-s2 border border-border rounded-[10px] p-4 cursor-pointer transition-all hover:bg-s3 hover:-translate-y-px border-l-[3px] ${liga.borderColor} ${i > 0 ? "mt-2" : ""}`}
-              onClick={() => onNavigate("ligen")}
+              onClick={() => onNavigate(`ligen:${liga.id}`)}
             >
               <div className="text-sm font-bold mb-1">{liga.name}</div>
               <div className="text-xs text-text-muted mb-2.5">{liga.meta}</div>

@@ -29,8 +29,8 @@ export default function Spieltag() {
     <div className="animate-fadeIn">
       <div className="flex justify-between items-start mb-6">
         <div>
-          <h1 className="text-[22px] font-bold mb-1">Spieltagsplanung</h1>
-          <p className="text-[13px] text-text-muted">Self-Service Heimspieltermine · Integrierter Verlegungsworkflow</p>
+          <h1 className="text-[22px] font-bold mb-1">Ligenübersicht</h1>
+          <p className="text-[13px] text-text-muted">Spieltage, Termine & Verlegungen auf einen Blick</p>
         </div>
         <div className="flex gap-2">
           <select className="w-[180px]"><option>Verbandsliga Nord</option><option>Bezirksliga Damen</option><option>Kreisliga Hannover</option></select>

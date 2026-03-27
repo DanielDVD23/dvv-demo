@@ -15,8 +15,10 @@ const standings = [
   { pl: 10, team: "TV Hildesheim", sp: 8, g: 0, v: 8, saetze: "2:24", punkte: 0, danger: true },
 ];
 
-export default function Ligen() {
-  const [activeLiga, setActiveLiga] = useState(0);
+const ligaIds = ["vbl-nord-herren", "bl-damen-1", "kl-herren-hannover"];
+
+export default function Ligen({ initialLiga }: { initialLiga?: string } = {}) {
+  const [activeLiga, setActiveLiga] = useState(initialLiga ? Math.max(0, ligaIds.indexOf(initialLiga)) : 0);
   const [accordionOpen, setAccordionOpen] = useState(false);
 
   return (

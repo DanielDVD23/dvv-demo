@@ -16,14 +16,15 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "dashboard", label: "Dashboard", badge: 5, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
-        label: "Meine Ligen",
+        label: "Spielbetrieb",
         items: [
+          { id: "spieltag", label: "Ligenübersicht", badge: 2, icon: "calendar-edit" },
           { id: "ligen", label: "Meine Ligen", icon: "star" },
           { id: "mannschaft", label: "Mannschaften meiner Ligen", icon: "users" },
-          { id: "spieltag", label: "Spieltagsplanung", badge: 2, icon: "calendar-edit" },
           { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
         ],
       },
@@ -32,13 +33,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
         items: [
           { id: "alle-ligen", label: "Alle Ligen", icon: "org-tree" },
           { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
           { id: "statistik", label: "Statistiken", icon: "pie-chart" },
-        ],
-      },
-      {
-        label: "Strafen",
-        items: [
           { id: "strafen", label: "Meine Strafbescheide", badge: 1, icon: "alert" },
         ],
       },
@@ -52,7 +47,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       mannschaft: ["NWVV", "Mannschaften meiner Ligen"],
       "alle-ligen": ["NWVV", "Alle Ligen"],
       "alle-mannschaften": ["NWVV", "Alle Mannschaften"],
-      spieltag: ["NWVV", "Spieltagsplanung"],
+      spieltag: ["NWVV", "Ligenübersicht"],
       heimspieltermine: ["NWVV", "Heimspieltermine"],
       statistik: ["NWVV", "Statistiken"],
       veranstaltungen: ["NWVV", "Veranstaltungen"],
@@ -83,12 +78,13 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "dashboard", label: "Dashboard", badge: 3, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
         label: "Mein Verein",
         items: [
-          { id: "mannschaften", label: "Meine Teams", icon: "users" },
+          { id: "mannschaften", label: "Meine Mannschaften", icon: "users" },
           { id: "heimspieltermine", label: "Heimspieltermine", icon: "calendar-home" },
           { id: "spieltag", label: "Spielplan", icon: "calendar-edit" },
         ],
@@ -98,7 +94,6 @@ export const roleConfigs: Record<Role, RoleConfig> = {
         items: [
           { id: "alle-ligen", label: "Alle Ligen", icon: "org-tree" },
           { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
           { id: "statistik", label: "Statistiken", icon: "pie-chart" },
         ],
       },
@@ -114,7 +109,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       mail: ["TSV Hannover", "Mail"],
       kalender: ["TSV Hannover", "Kalender"],
       kontakte: ["TSV Hannover", "Kontakte"],
-      mannschaften: ["TSV Hannover", "Meine Teams"],
+      mannschaften: ["TSV Hannover", "Meine Mannschaften"],
       "alle-ligen": ["TSV Hannover", "Alle Ligen"],
       "alle-mannschaften": ["TSV Hannover", "Alle Mannschaften"],
       spieltag: ["TSV Hannover", "Spielplan"],
@@ -146,6 +141,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "dashboard", label: "Dashboard", badge: 8, icon: "grid" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
+          { id: "kontakte", label: "Kontakte", icon: "book-open" },
         ],
       },
       {
@@ -162,12 +158,11 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "alle-ligen", label: "Alle Ligen", icon: "org-tree" },
           { id: "alle-mannschaften", label: "Alle Mannschaften", icon: "users" },
           { id: "vereine", label: "Vereine", icon: "building" },
-          { id: "kontakte", label: "Kontakte", icon: "book-open" },
           { id: "statistik", label: "Statistiken", icon: "pie-chart" },
         ],
       },
       {
-        label: "Finanzen",
+        label: "Finanzen & Ordnung",
         items: [
           { id: "rechnungen", label: "Rechnungen", badge: 5, icon: "file" },
           { id: "strafen", label: "Strafbescheide", badge: 2, icon: "alert" },

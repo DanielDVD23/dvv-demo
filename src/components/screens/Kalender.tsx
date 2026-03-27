@@ -1,102 +1,419 @@
 "use client";
 
 import { useState } from "react";
-import Badge from "@/components/ui/Badge";
-import Icon from "@/components/ui/Icon";
 
-const kw14 = [
-  { tag: "Mo 31.03.", spiele: [] },
-  { tag: "Di 01.04.", spiele: [{ zeit: "19:30", heim: "TSV Hannover Herren 2", gast: "VfR Bielefeld", liga: "Bezirksliga", halle: "Sporthalle Am Maschsee", typ: "Heimspiel" }] },
-  { tag: "Mi 02.04.", spiele: [{ zeit: "18:00", heim: "TSV Hannover Damen 1", gast: "—", liga: "Verbandsliga", halle: "IGS-Halle", typ: "Training" }] },
-  { tag: "Do 03.04.", spiele: [] },
-  { tag: "Fr 04.04.", spiele: [{ zeit: "20:00", heim: "TSV Hannover Herren 1", gast: "SC Paderborn", liga: "Verbandsliga Nord", halle: "Sporthalle Am Maschsee", typ: "Heimspiel" }] },
-  { tag: "Sa 05.04.", spiele: [
-    { zeit: "14:00", heim: "TSV Hannover Damen 1", gast: "MTV Braunschweig", liga: "Verbandsliga Nord", halle: "—", typ: "Auswärts" },
-    { zeit: "16:00", heim: "TSV Hannover Herren 2", gast: "SG Münster", liga: "Bezirksliga", halle: "—", typ: "Auswärts" },
-  ] },
-  { tag: "So 06.04.", spiele: [{ zeit: "11:00", heim: "TSV Hannover Jugend", gast: "SVC Göttingen U18", liga: "Jugend-BL", halle: "Turnhalle Bothfeld", typ: "Heimspiel" }] },
+type ViewMode = "Woche" | "Tag" | "Monat";
+
+interface CalendarEvent {
+  day: number; // 0=Mo, 1=Di, ... 6=So
+  startHour: number;
+  startMinute?: number;
+  durationRows: number; // in 60px rows
+  title: string;
+  details: string;
+  color: "green" | "purple" | "blue" | "orange";
+}
+
+const colorMap = {
+  green: {
+    bg: "rgba(2,202,75,0.15)",
+    border: "#02ca4b",
+    text: "#02ca4b",
+  },
+  purple: {
+    bg: "rgba(121,77,255,0.15)",
+    border: "#794dff",
+    text: "#794dff",
+  },
+  blue: {
+    bg: "rgba(59,130,246,0.15)",
+    border: "#3b82f6",
+    text: "#3b82f6",
+  },
+  orange: {
+    bg: "rgba(249,115,22,0.15)",
+    border: "#f97316",
+    text: "#f97316",
+  },
+};
+
+const events: CalendarEvent[] = [
+  {
+    day: 0,
+    startHour: 11,
+    durationRows: 2,
+    title: "VBL Nord",
+    details: "TSV Hannover vs. MTV Wolfsburg",
+    color: "green",
+  },
+  {
+    day: 2,
+    startHour: 14,
+    durationRows: 2,
+    title: "BL Süd",
+    details: "SVC Göttingen vs. TV Hildesheim",
+    color: "purple",
+  },
+  {
+    day: 3,
+    startHour: 9,
+    durationRows: 1,
+    title: "Staffelsitzung",
+    details: "NWVV Online",
+    color: "blue",
+  },
+  {
+    day: 3,
+    startHour: 11,
+    durationRows: 2,
+    title: "VBL Nord",
+    details: "SC Paderborn vs. VfR Bielefeld",
+    color: "green",
+  },
+  {
+    day: 4,
+    startHour: 11,
+    durationRows: 2,
+    title: "VBL Nord",
+    details: "USC Braunschweig vs. VC Osnabrück",
+    color: "green",
+  },
+  {
+    day: 4,
+    startHour: 16,
+    durationRows: 2,
+    title: "Kreisliga",
+    details: "Turnier Vorrunde",
+    color: "orange",
+  },
+  {
+    day: 5,
+    startHour: 10,
+    durationRows: 3,
+    title: "BL Süd",
+    details: "Spieltag 7 (3 Spiele)",
+    color: "purple",
+  },
+  {
+    day: 5,
+    startHour: 15,
+    durationRows: 2,
+    title: "VBL Nord",
+    details: "Spieltag 9 (2 Spiele)",
+    color: "green",
+  },
+  {
+    day: 6,
+    startHour: 10,
+    durationRows: 2,
+    title: "Jugendliga",
+    details: "U18 Turnier",
+    color: "blue",
+  },
 ];
 
-const kw15 = [
-  { tag: "Mo 07.04.", spiele: [] },
-  { tag: "Di 08.04.", spiele: [] },
-  { tag: "Mi 09.04.", spiele: [{ zeit: "19:00", heim: "TSV Hannover Herren 1", gast: "SVC Göttingen", liga: "Verbandsliga Nord", halle: "Sporthalle Am Maschsee", typ: "Heimspiel" }] },
-  { tag: "Do 10.04.", spiele: [{ zeit: "18:00", heim: "TSV Hannover Damen 1", gast: "—", liga: "Verbandsliga", halle: "IGS-Halle", typ: "Training" }] },
-  { tag: "Fr 11.04.", spiele: [] },
-  { tag: "Sa 12.04.", spiele: [
-    { zeit: "15:00", heim: "TSV Hannover Herren 1", gast: "MTV Wolfsburg", liga: "Verbandsliga Nord", halle: "—", typ: "Auswärts" },
-    { zeit: "14:00", heim: "TSV Hannover Damen 1", gast: "TV Hildesheim", liga: "Verbandsliga Nord", halle: "Sporthalle Am Maschsee", typ: "Heimspiel" },
-  ] },
-  { tag: "So 13.04.", spiele: [] },
+const dayLabels = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+const dayDates = [23, 24, 25, 26, 27, 28, 29];
+const hours = Array.from({ length: 12 }, (_, i) => i + 9); // 09:00 – 20:00
+const ROW_H = 60;
+const TODAY_INDEX = 4; // Fr 27.
+
+interface FilterChip {
+  label: string;
+  dotColor?: string;
+  bgColor?: string;
+  active: boolean;
+}
+
+const defaultFilters: FilterChip[] = [
+  { label: "Alle Ligen", active: false },
+  { label: "Verbandsliga Nord", dotColor: "#02ca4b", bgColor: "rgba(2,202,75,0.15)", active: true },
+  { label: "Bezirksliga Süd", dotColor: "#794dff", bgColor: "rgba(121,77,255,0.15)", active: true },
+  { label: "Kreisliga Hannover", active: false },
+  { label: "Jugendliga", active: false },
 ];
-
-const weeks: Record<string, typeof kw14> = { "KW 14 (31.03. – 06.04.)": kw14, "KW 15 (07.04. – 13.04.)": kw15 };
-
-const typColor: Record<string, "green" | "blue" | "gray" | "orange"> = { Heimspiel: "green", Auswärts: "blue", Training: "gray" };
 
 export default function Kalender() {
-  const [activeWeek, setActiveWeek] = useState(Object.keys(weeks)[0]);
-  const data = weeks[activeWeek];
+  const [view, setView] = useState<ViewMode>("Woche");
+  const [filters, setFilters] = useState<FilterChip[]>(defaultFilters);
 
-  const totalSpiele = data.reduce((s, d) => s + d.spiele.filter(sp => sp.typ !== "Training").length, 0);
-  const heimspiele = data.reduce((s, d) => s + d.spiele.filter(sp => sp.typ === "Heimspiel").length, 0);
+  const toggleFilter = (idx: number) => {
+    setFilters((prev) =>
+      prev.map((f, i) => (i === idx ? { ...f, active: !f.active } : f))
+    );
+  };
 
   return (
     <div className="animate-fadeIn">
-      <div className="flex justify-between items-start mb-6 flex-wrap gap-3">
-        <div>
-          <h1 className="text-[22px] font-bold mb-1">Vereinskalender</h1>
-          <p className="text-[13px] text-text-muted">Spiele und Termine nach Kalenderwoche</p>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <h1 style={{ fontSize: 22, fontWeight: 700, color: "#3f404d" }}>
+          Spielplan
+        </h1>
+        <div className="flex items-center gap-1">
+          {(["Woche", "Tag", "Monat"] as ViewMode[]).map((v) => (
+            <button
+              key={v}
+              onClick={() => setView(v)}
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                padding: "6px 14px",
+                borderRadius: 6,
+                border: v === view ? "none" : "1px solid #e2e8f0",
+                background: v === view ? "#794dff" : "#fff",
+                color: v === view ? "#fff" : "#3f404d",
+                cursor: "pointer",
+              }}
+            >
+              {v}
+            </button>
+          ))}
         </div>
-        <select value={activeWeek} onChange={e => setActiveWeek(e.target.value)} className="!h-[36px] !text-[12px] !w-auto">
-          {Object.keys(weeks).map(w => <option key={w} value={w}>{w}</option>)}
-        </select>
       </div>
 
-      {/* KPIs */}
-      <div className="grid grid-cols-3 gap-3 mb-5">
-        <div className="bg-s1 border border-border rounded-[10px] p-4">
-          <div className="text-[10px] font-semibold text-text-muted uppercase tracking-wide">Spiele</div>
-          <div className="text-[22px] font-bold text-accent mt-1">{totalSpiele}</div>
-        </div>
-        <div className="bg-s1 border border-border rounded-[10px] p-4">
-          <div className="text-[10px] font-semibold text-text-muted uppercase tracking-wide">Heimspiele</div>
-          <div className="text-[22px] font-bold text-green mt-1">{heimspiele}</div>
-        </div>
-        <div className="bg-s1 border border-border rounded-[10px] p-4">
-          <div className="text-[10px] font-semibold text-text-muted uppercase tracking-wide">Auswärts</div>
-          <div className="text-[22px] font-bold text-blue mt-1">{totalSpiele - heimspiele}</div>
-        </div>
-      </div>
-
-      {/* Day cards */}
-      <div className="space-y-2">
-        {data.map((day, i) => (
-          <div key={i} className={`bg-s1 border border-border rounded-[10px] overflow-hidden ${day.spiele.length === 0 ? "opacity-50" : ""}`}>
-            <div className="flex items-center gap-3 px-4 py-3 border-b border-border bg-s2">
-              <Icon name="calendar" size={14} className="text-text-muted" />
-              <span className="text-[13px] font-bold">{day.tag}</span>
-              {day.spiele.length > 0 && <Badge color="purple">{day.spiele.length} {day.spiele.length === 1 ? "Termin" : "Termine"}</Badge>}
-              {day.spiele.length === 0 && <span className="text-[11px] text-text-muted">Keine Termine</span>}
-            </div>
-            {day.spiele.length > 0 && (
-              <div className="divide-y divide-border">
-                {day.spiele.map((sp, j) => (
-                  <div key={j} className="flex items-center gap-4 px-4 py-3 hover:bg-s2 transition-colors">
-                    <span className="text-[13px] font-bold text-accent w-[50px] shrink-0">{sp.zeit}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[13px] font-semibold truncate">
-                        {sp.typ === "Training" ? sp.heim : `${sp.heim} vs. ${sp.gast}`}
-                      </div>
-                      <div className="text-[11px] text-text-muted">{sp.liga} · {sp.halle}</div>
-                    </div>
-                    <Badge color={typColor[sp.typ] || "gray"}>{sp.typ}</Badge>
-                  </div>
-                ))}
-              </div>
-            )}
+      {/* Navigation + Filters */}
+      <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <div className="flex items-center gap-2">
+          <button
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 6,
+              background: "#794dff",
+              color: "#fff",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              fontSize: 14,
+              fontWeight: 700,
+            }}
+          >
+            &lt;
+          </button>
+          <button
+            style={{
+              width: 28,
+              height: 28,
+              borderRadius: 6,
+              background: "#794dff",
+              color: "#fff",
+              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              fontSize: 14,
+              fontWeight: 700,
+            }}
+          >
+            &gt;
+          </button>
+          <div
+            style={{
+              background: "rgba(121,77,255,0.08)",
+              color: "#794dff",
+              fontWeight: 600,
+              fontSize: 13,
+              padding: "6px 14px",
+              borderRadius: 6,
+            }}
+          >
+            KW 13 &middot; 23. &ndash; 29. M&auml;rz 2026
           </div>
-        ))}
+        </div>
+
+        <div className="flex items-center gap-2 flex-wrap">
+          <span style={{ fontSize: 12, color: "#94a3b8", fontWeight: 500 }}>
+            Filter:
+          </span>
+          {filters.map((f, i) => (
+            <button
+              key={f.label}
+              onClick={() => toggleFilter(i)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                fontSize: 11,
+                fontWeight: 500,
+                padding: "5px 12px",
+                borderRadius: 999,
+                border: f.active ? "none" : "1px solid #e2e8f0",
+                background: f.active && f.bgColor ? f.bgColor : "#fff",
+                color: f.active && f.dotColor ? f.dotColor : "#3f404d",
+                cursor: "pointer",
+              }}
+            >
+              {f.dotColor && (
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: "50%",
+                    background: f.dotColor,
+                    flexShrink: 0,
+                  }}
+                />
+              )}
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Calendar grid */}
+      <div
+        className="bg-s1 border border-border rounded-[10px] overflow-hidden"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        {/* Day header row */}
+        <div style={{ display: "flex", borderBottom: "1px solid #e2e8f0" }}>
+          {/* Time column spacer */}
+          <div
+            style={{
+              width: 56,
+              minWidth: 56,
+              height: 44,
+              borderRight: "1px solid #e2e8f0",
+            }}
+          />
+          {dayLabels.map((label, i) => (
+            <div
+              key={label}
+              style={{
+                flex: 1,
+                height: 44,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 13,
+                fontWeight: i === TODAY_INDEX ? 700 : 500,
+                color: i === TODAY_INDEX ? "#794dff" : "#3f404d",
+                background:
+                  i === TODAY_INDEX ? "rgba(121,77,255,0.08)" : "transparent",
+                borderRight: i < 6 ? "1px solid #e2e8f0" : "none",
+              }}
+            >
+              {label} {dayDates[i]}.
+            </div>
+          ))}
+        </div>
+
+        {/* Scrollable body */}
+        <div style={{ overflowY: "auto", maxHeight: "calc(100vh - 240px)" }}>
+          <div style={{ display: "flex", position: "relative" }}>
+            {/* Time labels column */}
+            <div
+              style={{
+                width: 56,
+                minWidth: 56,
+                borderRight: "1px solid #e2e8f0",
+              }}
+            >
+              {hours.map((h) => (
+                <div
+                  key={h}
+                  style={{
+                    height: ROW_H,
+                    display: "flex",
+                    alignItems: "flex-start",
+                    justifyContent: "flex-end",
+                    paddingRight: 8,
+                    paddingTop: 4,
+                    fontSize: 11,
+                    color: "#94a3b8",
+                    borderBottom: "1px solid #e2e8f0",
+                    boxSizing: "border-box",
+                  }}
+                >
+                  {String(h).padStart(2, "0")}:00
+                </div>
+              ))}
+            </div>
+
+            {/* Day columns */}
+            {dayLabels.map((_, dayIdx) => {
+              const dayEvents = events.filter((e) => e.day === dayIdx);
+              return (
+                <div
+                  key={dayIdx}
+                  style={{
+                    flex: 1,
+                    position: "relative",
+                    background:
+                      dayIdx === TODAY_INDEX
+                        ? "rgba(121,77,255,0.03)"
+                        : "transparent",
+                    borderRight: dayIdx < 6 ? "1px solid #e2e8f0" : "none",
+                  }}
+                >
+                  {/* Row grid lines */}
+                  {hours.map((h) => (
+                    <div
+                      key={h}
+                      style={{
+                        height: ROW_H,
+                        borderBottom: "1px solid #e2e8f0",
+                        boxSizing: "border-box",
+                      }}
+                    />
+                  ))}
+
+                  {/* Events */}
+                  {dayEvents.map((ev, ei) => {
+                    const topOffset = (ev.startHour - 9) * ROW_H + (ev.startMinute || 0);
+                    const height = ev.durationRows * ROW_H - 4;
+                    const c = colorMap[ev.color];
+                    return (
+                      <div
+                        key={ei}
+                        style={{
+                          position: "absolute",
+                          top: topOffset + 2,
+                          left: 3,
+                          right: 3,
+                          height,
+                          background: c.bg,
+                          borderLeft: `3px solid ${c.border}`,
+                          borderRadius: 6,
+                          paddingTop: 6,
+                          paddingLeft: 8,
+                          paddingRight: 8,
+                          overflow: "hidden",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <div
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 600,
+                            color: c.text,
+                            lineHeight: "14px",
+                          }}
+                        >
+                          {ev.title}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 10,
+                            color: "#3f404d",
+                            lineHeight: "14px",
+                            marginTop: 2,
+                          }}
+                        >
+                          {ev.details}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );

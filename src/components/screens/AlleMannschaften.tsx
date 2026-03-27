@@ -17,20 +17,34 @@ interface Team {
 }
 
 const teams: Team[] = [
-  { mannschaft: "Damen 1", verein: "TSV Hannover", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 14, status: "Bestätigt" },
+  // Verbandsliga
   { mannschaft: "Herren 1", verein: "TSV Hannover", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "SVC Göttingen", liga: "Bezirksliga Hannover", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
-  { mannschaft: "Herren 2", verein: "SVC Göttingen", liga: "Bezirksliga Hannover", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
-  { mannschaft: "Damen 1", verein: "SVC Wolfsburg", liga: "Bezirksliga Hannover", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Gemeldet" },
-  { mannschaft: "Herren 1", verein: "TV Hildesheim", liga: "Kreisliga Hannover", spielklasse: "Kreisliga", kaderstaerke: 0, status: "Abgelehnt" },
+  { mannschaft: "Damen 1", verein: "TSV Hannover", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 14, status: "Bestätigt" },
   { mannschaft: "Herren 1", verein: "MTV Wolfsburg", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 13, status: "Bestätigt" },
   { mannschaft: "Damen 1", verein: "VfR Bielefeld", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Herren 1", verein: "MTV Braunschweig", liga: "Bezirksliga Braunschweig", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
-  { mannschaft: "Damen 2", verein: "TSV Hannover", liga: "Bezirksliga Hannover", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "SC Paderborn", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "SC Paderborn", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "USC Braunschweig", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "VC Osnabrück", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "In Prüfung" },
+  // Bezirksliga
+  { mannschaft: "Damen 1", verein: "SVC Göttingen", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 2", verein: "SVC Göttingen", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
+  { mannschaft: "Herren 1", verein: "MTV Braunschweig", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
+  { mannschaft: "Damen 2", verein: "TSV Hannover", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 2", verein: "TSV Hannover", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "SVC Wolfsburg", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Gemeldet" },
+  { mannschaft: "Herren 1", verein: "TSV Hildesheim", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "TV Hildesheim", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Gemeldet" },
+  // Kreisliga
+  { mannschaft: "Herren 1", verein: "TV Hildesheim", liga: "Kreisliga Hannover", spielklasse: "Kreisliga", kaderstaerke: 0, status: "Abgelehnt" },
   { mannschaft: "Herren 1", verein: "SC Osnabrück", liga: "Kreisliga Osnabrück", spielklasse: "Kreisliga", kaderstaerke: 9, status: "Gemeldet" },
   { mannschaft: "Mixed 1", verein: "TuS Göttingen", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 14, status: "Bestätigt" },
-  { mannschaft: "Herren 1", verein: "TSV Hildesheim", liga: "Bezirksliga Hannover", spielklasse: "Bezirksliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "SC Paderborn", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "TuS Göttingen", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 8, status: "Bestätigt" },
+  // Jugend
+  { mannschaft: "U18 Herren", verein: "TSV Hannover", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 14, status: "Bestätigt" },
+  { mannschaft: "U18 Damen", verein: "SVC Göttingen", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "U16 Mixed", verein: "MTV Wolfsburg", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 15, status: "In Prüfung" },
+  { mannschaft: "U18 Herren", verein: "VfR Bielefeld", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 11, status: "Gemeldet" },
 ];
 
 const statusColor = { "Bestätigt": "green" as const, "In Prüfung": "orange" as const, "Gemeldet": "blue" as const, "Abgelehnt": "red" as const };
@@ -77,6 +91,7 @@ export default function AlleMannschaften({ onNavigate }: { onNavigate: (screen: 
           <option>Verbandsliga</option>
           <option>Bezirksliga</option>
           <option>Kreisliga</option>
+          <option>Jugend</option>
         </select>
         <select value={filterLiga} onChange={e => setFilterLiga(e.target.value)} style={{ width: "auto", padding: "5px 28px 5px 10px", borderRadius: 99, fontSize: 12, fontWeight: filterLiga !== "Alle" ? 600 : 400, background: filterLiga !== "Alle" ? "rgba(124,58,237,0.06)" : "#fff", color: filterLiga !== "Alle" ? "#7c3aed" : "#475569", borderColor: filterLiga !== "Alle" ? "rgba(124,58,237,0.18)" : "#e8e5f0" }}>
           <option value="Alle">Liga</option>

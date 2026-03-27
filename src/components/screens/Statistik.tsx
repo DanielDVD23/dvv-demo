@@ -8,11 +8,11 @@ import Icon from "@/components/ui/Icon";
 const tabs = ["Sanktionen", "Aufschlag", "Spieler-Statistik", "Satz-Statistik"];
 
 const sanktionenData = [
-  { team: "TSV Hannover", verwarnung: 5, bestrafung: 2, disqualifikation: 0, gesamt: 7, players: [{ name: "M. Schmidt", verwarnung: 2, bestrafung: 1 }, { name: "T. Weber", verwarnung: 1, bestrafung: 1 }, { name: "K. Braun", verwarnung: 2, bestrafung: 0 }] },
-  { team: "SVC Göttingen", verwarnung: 8, bestrafung: 3, disqualifikation: 1, gesamt: 12, players: [{ name: "J. Fischer", verwarnung: 3, bestrafung: 1 }, { name: "L. Meyer", verwarnung: 3, bestrafung: 1 }, { name: "P. Schulz", verwarnung: 2, bestrafung: 1 }] },
-  { team: "MTV Wolfsburg", verwarnung: 3, bestrafung: 1, disqualifikation: 0, gesamt: 4, players: [{ name: "A. Koch", verwarnung: 2, bestrafung: 0 }, { name: "S. Bauer", verwarnung: 1, bestrafung: 1 }] },
-  { team: "SC Paderborn", verwarnung: 6, bestrafung: 2, disqualifikation: 0, gesamt: 8, players: [{ name: "D. Richter", verwarnung: 2, bestrafung: 1 }, { name: "N. Hartmann", verwarnung: 2, bestrafung: 1 }, { name: "F. Klein", verwarnung: 2, bestrafung: 0 }] },
-  { team: "TV Hildesheim", verwarnung: 4, bestrafung: 0, disqualifikation: 0, gesamt: 4, players: [{ name: "R. Wagner", verwarnung: 2, bestrafung: 0 }, { name: "C. Becker", verwarnung: 2, bestrafung: 0 }] },
+  { team: "TSV Hannover", verwarnung: 5, bestrafung: 2, hinausstellung: 1, disqualifikation: 0, gesamt: 8, players: [{ name: "M. Schmidt", verwarnung: 2, bestrafung: 1, hinausstellung: 1 }, { name: "T. Weber", verwarnung: 1, bestrafung: 1, hinausstellung: 0 }, { name: "K. Braun", verwarnung: 2, bestrafung: 0, hinausstellung: 0 }] },
+  { team: "SVC Göttingen", verwarnung: 8, bestrafung: 3, hinausstellung: 2, disqualifikation: 1, gesamt: 14, players: [{ name: "J. Fischer", verwarnung: 3, bestrafung: 1, hinausstellung: 1 }, { name: "L. Meyer", verwarnung: 3, bestrafung: 1, hinausstellung: 1 }, { name: "P. Schulz", verwarnung: 2, bestrafung: 1, hinausstellung: 0 }] },
+  { team: "MTV Wolfsburg", verwarnung: 3, bestrafung: 1, hinausstellung: 0, disqualifikation: 0, gesamt: 4, players: [{ name: "A. Koch", verwarnung: 2, bestrafung: 0, hinausstellung: 0 }, { name: "S. Bauer", verwarnung: 1, bestrafung: 1, hinausstellung: 0 }] },
+  { team: "SC Paderborn", verwarnung: 6, bestrafung: 2, hinausstellung: 1, disqualifikation: 0, gesamt: 9, players: [{ name: "D. Richter", verwarnung: 2, bestrafung: 1, hinausstellung: 1 }, { name: "N. Hartmann", verwarnung: 2, bestrafung: 1, hinausstellung: 0 }, { name: "F. Klein", verwarnung: 2, bestrafung: 0, hinausstellung: 0 }] },
+  { team: "TV Hildesheim", verwarnung: 4, bestrafung: 0, hinausstellung: 0, disqualifikation: 0, gesamt: 4, players: [{ name: "R. Wagner", verwarnung: 2, bestrafung: 0, hinausstellung: 0 }, { name: "C. Becker", verwarnung: 2, bestrafung: 0, hinausstellung: 0 }] },
 ];
 
 const aufschlagData = [
@@ -100,6 +100,13 @@ export default function Statistik() {
               </div>
             </div>
             <div className="bg-s1 border border-border rounded-[10px] px-4 py-3 flex items-center gap-2">
+              <div className="w-5 h-7 rounded-sm bg-[#dc2626]" />
+              <div>
+                <div className="text-[18px] font-bold">{sanktionenData.reduce((s, t) => s + t.hinausstellung, 0)}</div>
+                <div className="text-[10px] text-text-muted">Hinausstellungen</div>
+              </div>
+            </div>
+            <div className="bg-s1 border border-border rounded-[10px] px-4 py-3 flex items-center gap-2">
               <div className="w-5 h-7 rounded-sm bg-[#991b1b]" />
               <div>
                 <div className="text-[18px] font-bold">{sanktionenData.reduce((s, t) => s + t.disqualifikation, 0)}</div>
@@ -111,7 +118,7 @@ export default function Statistik() {
             <table className="w-full border-collapse text-[13px]">
               <thead>
                 <tr>
-                  {["Team", "Verwarnung", "Bestrafung", "Disqualifikation", "Gesamt", ""].map((h) => (
+                  {["Team", "Verwarnung", "Bestrafung", "Hinausstellung", "Disqualifikation", "Gesamt", ""].map((h) => (
                     <th key={h} className="text-[11px] font-semibold text-text-muted uppercase tracking-wide px-3.5 py-2.5 text-left border-b border-border">{h}</th>
                   ))}
                 </tr>
@@ -128,6 +135,9 @@ export default function Statistik() {
                         <span className="inline-flex items-center gap-1"><span className="w-3 h-4 rounded-sm bg-red inline-block" /> {t.bestrafung}</span>
                       </td>
                       <td className="px-3.5 py-3 border-b border-border">
+                        <span className="inline-flex items-center gap-1"><span className="w-3 h-4 rounded-sm bg-[#dc2626] inline-block" /> {t.hinausstellung}</span>
+                      </td>
+                      <td className="px-3.5 py-3 border-b border-border">
                         <span className="inline-flex items-center gap-1"><span className="w-3 h-4 rounded-sm bg-[#991b1b] inline-block" /> {t.disqualifikation}</span>
                       </td>
                       <td className="px-3.5 py-3 border-b border-border font-bold">{t.gesamt}</td>
@@ -138,8 +148,9 @@ export default function Statistik() {
                         <td className="px-3.5 py-2 border-b border-border text-xs pl-8 text-text-dim">{p.name}</td>
                         <td className="px-3.5 py-2 border-b border-border text-xs">{p.verwarnung}</td>
                         <td className="px-3.5 py-2 border-b border-border text-xs">{p.bestrafung}</td>
+                        <td className="px-3.5 py-2 border-b border-border text-xs">{p.hinausstellung}</td>
                         <td className="px-3.5 py-2 border-b border-border" />
-                        <td className="px-3.5 py-2 border-b border-border text-xs">{p.verwarnung + p.bestrafung}</td>
+                        <td className="px-3.5 py-2 border-b border-border text-xs">{p.verwarnung + p.bestrafung + p.hinausstellung}</td>
                         <td className="px-3.5 py-2 border-b border-border" />
                       </tr>
                     ))}

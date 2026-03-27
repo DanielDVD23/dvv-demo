@@ -95,8 +95,8 @@ export default function Rechnungen({ action, onActionHandled }: { action?: strin
       <SectionHeader title="Offene Rechnungen" right={
         <div className="flex gap-2 items-center">
           <select className="!w-[140px] text-xs"><option>Alle Typen</option><option>Liga-Beiträge</option><option>Strafen</option></select>
-          <Button variant="ghost" onClick={() => setStrafeModal(true)}>+ Strafbescheid erstellen</Button>
-          <Button onClick={() => { setNeueRechnungModal(true); setRechnungStep(1); }}>+ Neue Rechnung erstellen</Button>
+          <Button onClick={() => setStrafeModal(true)}>+ Strafbescheid</Button>
+          <Button onClick={() => { setNeueRechnungModal(true); setRechnungStep(1); }}>+ Neue Rechnung</Button>
         </div>
       } />
       <Card noPadding className="overflow-hidden mb-6">

@@ -27,6 +27,7 @@ import Veranstaltungen from "@/components/screens/Veranstaltungen";
 import Kontakte from "@/components/screens/Kontakte";
 import Kalender from "@/components/screens/Kalender";
 import Strafen from "@/components/screens/Strafen";
+import Mail from "@/components/screens/Mail";
 import HelpPanel from "@/components/HelpPanel";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
@@ -413,7 +414,7 @@ export default function App() {
           {screen === "dashboard" && role === "staffelleitung" && <Dashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "clubadmin" && <ClubDashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "verbandsadmin" && <VerbandDashboard onNavigate={setScreen} />}
-          {screen === "ligen" && <Ligen />}
+          {(screen === "ligen" || screen.startsWith("ligen:")) && <Ligen initialLiga={screen.startsWith("ligen:") ? screen.replace("ligen:", "") : undefined} />}
           {(screen === "spieltag" || screen === "spielplan") && <Spieltag />}
           {screen === "heimspieltermine" && <Heimspieltermine />}
           {(screen === "mannschaft" || screen === "spielermeldung") && <Mannschaft action={action} onActionHandled={() => setAction(null)} />}
@@ -430,7 +431,7 @@ export default function App() {
           {screen === "cms" && <Cms />}
           {screen === "nominierung" && <Nominierung />}
           {screen === "passkontrolle" && <Passkontrolle />}
-          {screen === "mail" && <EmptyScreen title="Mail" subtitle="Posteingang und Nachrichten" icon="mail" />}
+          {screen === "mail" && <Mail />}
           {screen === "kalender" && <Kalender />}
           {screen === "kontakte" && <Kontakte />}
           {screen === "strafen" && <Strafen />}

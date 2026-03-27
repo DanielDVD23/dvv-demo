@@ -4,6 +4,7 @@ import { useState } from "react";
 import Badge from "@/components/ui/Badge";
 import Icon from "@/components/ui/Icon";
 import FilterBar from "@/components/ui/FilterBar";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const strafen = [
   { id: "ST-2026-001", datum: "12.03.2026", verein: "TV Hannover", grund: "Nichtantritt Verbandsliga Spieltag 7", paragraph: "BSO §17.3", betrag: "150,00", status: "Offen" },
@@ -84,6 +85,29 @@ export default function Strafen() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Buchhaltungsanbindung */}
+      <SectionHeader title="Buchhaltungsanbindung" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {/* DATEV */}
+        <div className="bg-s1 border border-border rounded-[10px] p-4 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[13px] font-extrabold shrink-0" style={{ backgroundColor: "#0078d4" }}>D</div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px] font-bold">DATEV</div>
+            <div className="text-[11px] text-text-muted">Zuletzt sync: heute 08:12 · 4 Strafen exportiert</div>
+          </div>
+          <Badge color="green">Sync</Badge>
+        </div>
+        {/* Lexware */}
+        <div className="bg-s1 border border-border rounded-[10px] p-4 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-[13px] font-extrabold shrink-0" style={{ backgroundColor: "#ff6900" }}>L</div>
+          <div className="flex-1 min-w-0">
+            <div className="text-[13px] font-bold">Lexware</div>
+            <div className="text-[11px] text-text-muted">Verbunden seit Jan. 2025</div>
+          </div>
+          <Badge color="green">Verbunden</Badge>
+        </div>
       </div>
     </div>
   );
