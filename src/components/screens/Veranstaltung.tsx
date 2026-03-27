@@ -29,7 +29,7 @@ export default function Veranstaltung({ onNavigate }: { onNavigate?: (screen: st
     ? ["Lehrgangsart", "Grunddaten", "Ort & Zeit", "Lizenzierung", "Konfiguration", "Vorschau"]
     : ["Grunddaten", "Ort & Zeit", "Konfiguration", "Vorschau"];
 
-  const maxStep = steps.length;
+  const maxStep = steps.length + 1; // +1 because step 0 is type selection (not in steps array)
 
   const resetToTypeSelect = () => {
     setEventType("");
