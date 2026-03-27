@@ -96,22 +96,88 @@ function getTagBg(color: string) {
   return "rgba(0,0,0,0.05)";
 }
 
+const empfaengerOptionen = [
+  "Alle Vereinsadmins", "Alle Staffelleiter", "Alle Trainer", "Alle Schiedsrichter",
+  "TSV Hannover", "MTV Wolfsburg", "SVC Göttingen", "SC Paderborn", "VfR Bielefeld",
+  "Verbandsliga Nord – Alle", "Bezirksliga Süd – Alle",
+];
+
+const labelCls = "text-[11px] font-semibold text-[#64748b] uppercase tracking-wide mb-1.5 block";
+
 export default function Mail() {
   const [selectedMail, setSelectedMail] = useState(0);
   const [activeTab, setActiveTab] = useState("alle");
+  const [composeOpen, setComposeOpen] = useState(false);
+  const [composeForm, setComposeForm] = useState({ empfaenger: "", betreff: "", nachricht: "" });
+  const [successMsg, setSuccessMsg] = useState("");
 
   const selected = mails[selectedMail];
 
+  const handleSend = () => {
+    if (!composeForm.empfaenger || !composeForm.betreff.trim()) return;
+    setComposeOpen(false);
+    setComposeForm({ empfaenger: "", betreff: "", nachricht: "" });
+    setSuccessMsg("Nachricht wurde gesendet.");
+    setTimeout(() => setSuccessMsg(""), 3000);
+  };
+
   return (
-    <div className="animate-fadeIn flex h-[calc(100vh-80px)]">
+    <div className="animate-fadeIn flex h-[calc(100vh-80px)] relative">
+      {/* Success toast */}
+      {successMsg && (
+        <div className="fixed top-4 right-4 z-[999] bg-[#22c55e] text-white px-5 py-3 rounded-[10px] text-[13px] font-semibold shadow-lg flex items-center gap-2" style={{ animation: "slideUp 0.3s ease" }}>
+          ✓ {successMsg}
+        </div>
+      )}
+
+      {/* Compose Modal */}
+      {composeOpen && (
+        <div className="fixed inset-0 bg-black/60 z-[1000] flex items-center justify-center" onClick={() => setComposeOpen(false)}>
+          <div className="bg-white rounded-[14px] p-7 w-[560px] max-w-[95vw] max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()} style={{ animation: "slideUp 0.2s ease" }}>
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="text-[17px] font-bold" style={{ color: "#1e1b4b" }}>Neue Nachricht</h3>
+              <button className="w-7 h-7 rounded-[6px] flex items-center justify-center cursor-pointer" style={{ backgroundColor: "#f1f5f9", border: "1px solid #e2e8f0" }} onClick={() => setComposeOpen(false)}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+              </button>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className={labelCls}>Empfänger *</label>
+                <select value={composeForm.empfaenger} onChange={e => setComposeForm({ ...composeForm, empfaenger: e.target.value })} style={{ width: "100%", height: 38, borderRadius: 8, border: "1px solid #e2e8f0", padding: "0 12px", fontSize: 13, fontFamily: "inherit" }}>
+                  <option value="">Empfänger auswählen...</option>
+                  <optgroup label="Gruppen">
+                    {empfaengerOptionen.filter(e => e.startsWith("Alle") || e.includes("–")).map(e => <option key={e} value={e}>{e}</option>)}
+                  </optgroup>
+                  <optgroup label="Vereine">
+                    {empfaengerOptionen.filter(e => !e.startsWith("Alle") && !e.includes("–")).map(e => <option key={e} value={e}>{e}</option>)}
+                  </optgroup>
+                </select>
+              </div>
+              <div>
+                <label className={labelCls}>Betreff *</label>
+                <input value={composeForm.betreff} onChange={e => setComposeForm({ ...composeForm, betreff: e.target.value })} placeholder="Betreff eingeben..." style={{ width: "100%", height: 38, borderRadius: 8, border: "1px solid #e2e8f0", padding: "0 12px", fontSize: 13, fontFamily: "inherit" }} />
+              </div>
+              <div>
+                <label className={labelCls}>Nachricht</label>
+                <textarea value={composeForm.nachricht} onChange={e => setComposeForm({ ...composeForm, nachricht: e.target.value })} placeholder="Nachricht verfassen..." rows={8} style={{ width: "100%", borderRadius: 8, border: "1px solid #e2e8f0", padding: "12px", fontSize: 13, fontFamily: "inherit", resize: "vertical" }} />
+              </div>
+              <div className="flex gap-3 pt-2">
+                <button onClick={() => setComposeOpen(false)} className="flex-1 h-9 rounded-[6px] text-[13px] font-medium cursor-pointer" style={{ border: "1px solid #e2e8f0", background: "white", color: "#475569", fontFamily: "inherit" }}>Abbrechen</button>
+                <button onClick={handleSend} disabled={!composeForm.empfaenger || !composeForm.betreff.trim()} className="flex-1 h-9 rounded-[6px] text-[13px] font-medium text-white cursor-pointer border-none" style={{ backgroundColor: !composeForm.empfaenger || !composeForm.betreff.trim() ? "#c4b5fd" : "#7c3aed", fontFamily: "inherit" }}>Nachricht senden</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Left Panel - Mail List */}
       <div className="w-[380px] shrink-0 border-r border-border bg-s1 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between px-4 pt-4 pb-3">
           <h2 style={{ fontSize: 18, fontWeight: 700, color: "#1e1b4b" }}>Posteingang</h2>
           <button
-            className="flex items-center gap-1 px-3 text-white text-[12px] font-medium rounded-[6px]"
-            style={{ backgroundColor: "#7c3aed", height: 28 }}
+            className="flex items-center gap-1 px-3 text-white text-[12px] font-medium rounded-[6px] cursor-pointer border-none"
+            style={{ backgroundColor: "#7c3aed", height: 28, fontFamily: "inherit" }}
+            onClick={() => setComposeOpen(true)}
           >
             + Neue Nachricht
           </button>

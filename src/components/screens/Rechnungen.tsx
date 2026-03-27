@@ -29,7 +29,8 @@ interface LineItem {
   einzelpreis: number;
 }
 
-export default function Rechnungen({ action, onActionHandled }: { action?: string | null; onActionHandled?: () => void } = {}) {
+export default function Rechnungen({ action, onActionHandled, role }: { action?: string | null; onActionHandled?: () => void; role?: string } = {}) {
+  const canCreateStrafe = role === "staffelleitung" || role === "verbandsadmin";
   const [strafeModal, setStrafeModal] = useState(false);
   const [strafeBetrag, setStrafeBetrag] = useState("");
   const [neueRechnungModal, setNeueRechnungModal] = useState(false);
@@ -95,7 +96,7 @@ export default function Rechnungen({ action, onActionHandled }: { action?: strin
       <SectionHeader title="Offene Rechnungen" right={
         <div className="flex gap-2 items-center">
           <select className="!w-[140px] text-xs"><option>Alle Typen</option><option>Liga-Beiträge</option><option>Strafen</option></select>
-          <Button onClick={() => setStrafeModal(true)}>+ Strafbescheid</Button>
+          {canCreateStrafe && <Button onClick={() => setStrafeModal(true)}>+ Strafbescheid</Button>}
           <Button onClick={() => { setNeueRechnungModal(true); setRechnungStep(1); }}>+ Neue Rechnung</Button>
         </div>
       } />

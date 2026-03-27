@@ -424,10 +424,10 @@ export default function App() {
           {screen === "alle-mannschaften" && <AlleMannschaften onNavigate={setScreen} />}
           {screen === "vereine" && <Vereine onNavigate={setScreen} />}
           {screen === "statistik" && <Statistik />}
-          {screen === "veranstaltung" && <Veranstaltung />}
+          {screen === "veranstaltung" && <Veranstaltung onNavigate={setScreen} />}
           {screen === "veranstaltungen" && <Veranstaltungen onNavigate={setScreen} />}
           {screen === "turnier" && <Turnier />}
-          {screen === "rechnungen" && <Rechnungen action={action} onActionHandled={() => setAction(null)} />}
+          {screen === "rechnungen" && <Rechnungen action={action} onActionHandled={() => setAction(null)} role={role} />}
           {screen === "cms" && <Cms />}
           {screen === "nominierung" && <Nominierung />}
           {screen === "passkontrolle" && <Passkontrolle />}

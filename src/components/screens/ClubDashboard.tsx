@@ -130,7 +130,7 @@ export default function ClubDashboard({ onNavigate }: ClubDashboardProps) {
             <div
               key={i}
               className={`bg-s2 border border-border rounded-[10px] p-4 cursor-pointer transition-all hover:bg-s3 hover:-translate-y-px border-l-[3px] ${team.borderColor} ${i > 0 ? "mt-2" : ""}`}
-              onClick={() => onNavigate("mannschaften")}
+              onClick={() => onNavigate(`team-detail:${encodeURIComponent(team.name)}`)}
             >
               <div className="text-sm font-bold mb-1">{team.name}</div>
               <div className="text-xs text-text-muted mb-2.5">{team.meta}</div>

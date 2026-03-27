@@ -16,7 +16,8 @@ const typeCards = [
   { id: "versammlung" as const, icon: "clipboard", name: "Versammlung / Meeting", desc: "Verbandstag, Gremien, Sitzung", color: "border-l-green" },
 ];
 
-export default function Veranstaltung() {
+export default function Veranstaltung({ onNavigate }: { onNavigate?: (screen: string) => void } = {}) {
+  const [published, setPublished] = useState(false);
   const [eventType, setEventType] = useState<EventType>("");
   const [lehrgangArt, setLehrgangArt] = useState<LehrgangArt>("");
   const [currentStep, setCurrentStep] = useState(0); // 0 = type selection
@@ -25,10 +26,8 @@ export default function Veranstaltung() {
   const [weitereOpen, setWeitereOpen] = useState(false);
 
   const steps = eventType === "lehrgang"
-    ? ["Typ wählen", "Lehrgangsart", "Grunddaten", "Ort & Zeit", "Lizenzierung", "Konfiguration", "Vorschau"]
-    : eventType === "turnier"
-    ? ["Typ wählen", "Grunddaten", "Ort & Zeit", "Konfiguration", "Vorschau"]
-    : ["Typ wählen", "Grunddaten", "Ort & Zeit", "Konfiguration", "Vorschau"];
+    ? ["Lehrgangsart", "Grunddaten", "Ort & Zeit", "Lizenzierung", "Konfiguration", "Vorschau"]
+    : ["Grunddaten", "Ort & Zeit", "Konfiguration", "Vorschau"];
 
   const maxStep = steps.length;
 
@@ -451,11 +450,25 @@ export default function Veranstaltung() {
               <input type="date" defaultValue="2026-04-01" />
             </div>
           </Card>
-          <div className="flex gap-2.5 justify-end mt-6 pt-4 border-t border-border">
-            <Button variant="ghost" onClick={() => setCurrentStep(currentStep - 1)}>← Zurück</Button>
-            <Button variant="ghost">Als Entwurf speichern</Button>
-            <Button>Veröffentlichen</Button>
-          </div>
+          {published ? (
+            <div className="mt-6 bg-green-dim border border-[rgba(34,197,94,0.3)] rounded-[10px] p-6 text-center">
+              <div className="text-[28px] mb-2">✓</div>
+              <div className="text-[16px] font-bold text-green mb-1">Veranstaltung veröffentlicht!</div>
+              <div className="text-[13px] text-text-muted mb-4">
+                {eventType === "lehrgang" ? "C-Trainer Lehrgang 2026" : eventType === "turnier" ? "Bezirksmeisterschaft U16w" : "Neue Veranstaltung"} wurde erfolgreich erstellt und ist ab sofort sichtbar.
+              </div>
+              <div className="flex gap-3 justify-center">
+                <Button variant="ghost" onClick={() => onNavigate?.("veranstaltungen")}>Alle Veranstaltungen</Button>
+                <Button onClick={() => onNavigate?.("dashboard")}>Zum Dashboard →</Button>
+              </div>
+            </div>
+          ) : (
+            <div className="flex gap-2.5 justify-end mt-6 pt-4 border-t border-border">
+              <Button variant="ghost" onClick={() => setCurrentStep(currentStep - 1)}>← Zurück</Button>
+              <Button variant="ghost">Als Entwurf speichern</Button>
+              <Button onClick={() => setPublished(true)}>Veröffentlichen</Button>
+            </div>
+          )}
         </div>
       );
     }
@@ -475,19 +488,20 @@ export default function Veranstaltung() {
         )}
       </div>
 
-      {/* Wizard Steps */}
-      {eventType && (
+      {/* Wizard Steps - only show after type selection */}
+      {eventType && currentStep > 0 && (
         <div className="flex items-center mb-7 bg-s1 border border-border rounded-[10px] overflow-hidden">
           {steps.map((step, i) => {
-            const isDone = i < currentStep;
-            const isActive = i === currentStep;
+            const stepIdx = i + 1; // offset because step 0 is type selection
+            const isDone = stepIdx < currentStep;
+            const isActive = stepIdx === currentStep;
             return (
               <div
                 key={i}
                 className={`flex-1 flex items-center gap-2 py-3 px-3 text-xs font-semibold cursor-pointer transition-all ${i < steps.length - 1 ? "border-r border-border" : ""} ${
                   isActive ? "bg-accent-dim text-accent" : isDone ? "text-green" : "text-text-muted"
                 }`}
-                onClick={() => isDone && setCurrentStep(i)}
+                onClick={() => isDone && setCurrentStep(stepIdx)}
               >
                 <div className={`w-[22px] h-[22px] rounded-full shrink-0 flex items-center justify-center text-[11px] font-bold ${
                   isActive ? "bg-accent text-white" : isDone ? "bg-green text-white" : "bg-s3 text-text-muted"
