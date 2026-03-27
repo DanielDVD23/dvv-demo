@@ -148,7 +148,7 @@ export default function ClubDashboard({ onNavigate }: ClubDashboardProps) {
             <div className="text-[11px] font-bold uppercase tracking-wider text-accent mb-2 flex items-center gap-1.5"><Icon name="sparkle" size={14} /> KI-Assistent</div>
             <div className="text-[13px] font-semibold mb-1.5">Aufstellungs-Vorschlag</div>
             <div className="text-xs text-text-muted mb-2.5">Basierend auf Verfügbarkeiten: Optimale Aufstellung für Herren 1 vs. SVC Göttingen am 29.03.</div>
-            <Button size="sm" onClick={() => onNavigate("spielplan")}>Aufstellung ansehen</Button>
+            <Button size="sm" onClick={() => onNavigate("team-detail:TSV Hannover Herren 1")}>Aufstellung ansehen</Button>
           </div>
         </div>
       </div>
