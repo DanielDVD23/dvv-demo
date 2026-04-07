@@ -1,5 +1,5 @@
 interface ButtonProps {
-  variant?: "primary" | "ghost" | "danger" | "success";
+  variant?: "primary" | "ghost" | "danger" | "success" | "warning";
   size?: "sm" | "md";
   children: React.ReactNode;
   className?: string;
@@ -12,6 +12,7 @@ const variants = {
   ghost: "bg-transparent text-text-dim border border-border hover:bg-s2 hover:text-text",
   danger: "bg-red-dim text-red border border-[rgba(239,68,68,0.2)]",
   success: "bg-green-dim text-green border border-[rgba(34,197,94,0.2)]",
+  warning: "bg-orange-dim text-orange border border-[rgba(217,119,6,0.2)]",
 } as const;
 
 export default function Button({ variant = "primary", size = "md", children, className = "", onClick, disabled }: ButtonProps) {

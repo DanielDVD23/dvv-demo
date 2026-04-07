@@ -30,6 +30,32 @@ import Strafen from "@/components/screens/Strafen";
 import Mail from "@/components/screens/Mail";
 import Spielplan from "@/components/screens/Spielplan";
 import HelpPanel from "@/components/HelpPanel";
+// New DVV module screens
+import Organisationen from "@/components/screens/Organisationen";
+import Personen from "@/components/screens/Personen";
+import Spielstaetten from "@/components/screens/Spielstaetten";
+import RechteRollen from "@/components/screens/RechteRollen";
+import Ehrungen from "@/components/screens/Ehrungen";
+import LizenzDashboard from "@/components/screens/LizenzDashboard";
+import LizenzQueue from "@/components/screens/LizenzQueue";
+import LizenzConfig from "@/components/screens/LizenzConfig";
+import LizenzUebersichtSpieler from "@/components/screens/LizenzUebersichtSpieler";
+import LigaUebersicht from "@/components/screens/LigaUebersicht";
+import SpielplanVerwaltung from "@/components/screens/SpielplanVerwaltung";
+import LiveTicker from "@/components/screens/LiveTicker";
+import BeachTurniere from "@/components/screens/BeachTurniere";
+import Spielanalyse from "@/components/screens/Spielanalyse";
+import FinanzDashboard from "@/components/screens/FinanzDashboard";
+import Automationen from "@/components/screens/Automationen";
+import Reporting from "@/components/screens/Reporting";
+import SrAnsetzung from "@/components/screens/SrAnsetzung";
+import SrPool from "@/components/screens/SrPool";
+import SrFahrtkosten from "@/components/screens/SrFahrtkosten";
+import Kommunikation from "@/components/screens/Kommunikation";
+import Lehrgaenge from "@/components/screens/Lehrgaenge";
+import Sponsoren from "@/components/screens/Sponsoren";
+import Shop from "@/components/screens/Shop";
+import VereinsMitglieder from "@/components/screens/VereinsMitglieder";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -335,7 +361,7 @@ export default function App() {
   const [mobileNav, setMobileNav] = useState(false);
 
   const config = roleConfigs[role];
-  const crumbs = config.breadcrumbs[screen] || ["NWVV", screen];
+  const crumbs = config.breadcrumbs[screen] || [config.subtitle || "DVV", screen];
 
   const switchRole = (r: Role) => {
     setRole(r);
@@ -437,6 +463,39 @@ export default function App() {
           {screen === "kalender" && <Kalender />}
           {screen === "kontakte" && <Kontakte />}
           {screen === "strafen" && <Strafen />}
+          {/* P1: Stammdatenverwaltung */}
+          {screen === "organisationen" && <Organisationen />}
+          {screen === "personen" && <Personen />}
+          {screen === "spielstaetten" && <Spielstaetten />}
+          {screen === "rechte-rollen" && <RechteRollen />}
+          {screen === "ehrungen" && <Ehrungen />}
+          {/* P1: Lizenzwesen */}
+          {screen === "lizenz-dashboard" && <LizenzDashboard />}
+          {screen === "lizenz-queue" && <LizenzQueue />}
+          {screen === "lizenz-config" && <LizenzConfig />}
+          {screen === "lizenz-uebersicht-spieler" && <LizenzUebersichtSpieler />}
+          {/* P1: Sportlicher Wettbewerb */}
+          {screen === "liga-uebersicht" && <LigaUebersicht />}
+          {screen === "spielplan-verwaltung" && <SpielplanVerwaltung />}
+          {screen === "live-ticker" && <LiveTicker />}
+          {screen === "beach-turniere" && <BeachTurniere />}
+          {screen === "spielanalyse" && <Spielanalyse />}
+          {/* P2: Verbandsorganisation */}
+          {screen === "finanz-dashboard" && <FinanzDashboard />}
+          {screen === "automationen" && <Automationen />}
+          {screen === "reporting" && <Reporting />}
+          {/* P2: Schiedsrichtereinsatztool */}
+          {screen === "sr-ansetzung" && <SrAnsetzung />}
+          {screen === "sr-pool" && <SrPool />}
+          {screen === "sr-fahrtkosten" && <SrFahrtkosten />}
+          {/* P3: Kommunikation, Bildung */}
+          {screen === "kommunikation" && <Kommunikation />}
+          {screen === "lehrgaenge" && <Lehrgaenge />}
+          {/* P4: Sponsoren, Shop */}
+          {screen === "sponsoren" && <Sponsoren />}
+          {screen === "shop" && <Shop />}
+          {/* Verein */}
+          {screen === "vereins-mitglieder" && <VereinsMitglieder />}
         </div>
       </div>
 

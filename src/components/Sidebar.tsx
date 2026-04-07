@@ -38,6 +38,21 @@ function NavIcon({ type }: { type: string }) {
     "calendar-edit": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M15 13.5l-4.5 4.5L9 18l.5-1.5 4.5-4.5a.7.7 0 0 1 1 1z" /></svg>,
     "calendar-home": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /><path d="M9 19v-3h6v3M12 13l-4 3h8z" /></svg>,
     "org-tree": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" /><rect x="2" y="18" width="6" height="4" rx="1" /><rect x="16" y="18" width="6" height="4" rx="1" /><path d="M12 6v4M12 10H5v8M12 10h7v8" /></svg>,
+    volleyball: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10" /><path d="M2 12h20" /></svg>,
+    whistle: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="14" cy="14" r="7" /><path d="M7 7l3 3M3 3l4 4" /><circle cx="14" cy="14" r="2" /></svg>,
+    "graduation-cap": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 10l-10-5L2 10l10 5 10-5z" /><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5" /><path d="M22 10v6" /></svg>,
+    megaphone: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11l18-5v12L3 13v-2z" /><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg>,
+    handshake: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 8l-5 5-3-3-5 5" /><path d="M2 14l5-5 3 3 5-5M2 22h4l8-8M22 22h-4l-4-4" /></svg>,
+    "shopping-bag": <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" /><line x1="3" y1="6" x2="21" y2="6" /><path d="M16 10a4 4 0 0 1-8 0" /></svg>,
+    key: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zM15.5 7.5l3 3L22 7l-3-3" /></svg>,
+    award: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7" /><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" /></svg>,
+    map: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" /><line x1="8" y1="2" x2="8" y2="18" /><line x1="16" y1="6" x2="16" y2="22" /></svg>,
+    coin: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v12M9 9h4.5a1.5 1.5 0 0 1 0 3H9m0 0h5.5a1.5 1.5 0 0 1 0 3H9" /></svg>,
+    zap: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>,
+    newspaper: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2" /><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z" /></svg>,
+    refresh: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10" /><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" /></svg>,
+    settings: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>,
+    check: <svg className={cls} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>,
   };
   return icons[type] || null;
 }
@@ -60,7 +75,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // On mobile: show as overlay when mobileOpen, otherwise hidden
   if (isMobile && !mobileOpen) return null;
 
   const showLabels = !collapsed || (isMobile && mobileOpen);
@@ -68,7 +82,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
 
   return (
     <>
-      {/* Mobile overlay backdrop */}
       {isMobile && mobileOpen && (
         <div
           onClick={onMobileClose}
@@ -93,7 +106,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
           overflow: "hidden",
         }}
       >
-        {/* Mobile close button */}
         {isMobile && (
           <div style={{ display: "flex", justifyContent: "flex-end", padding: "12px 12px 0" }}>
             <button onClick={onMobileClose} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}>
@@ -102,7 +114,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
           </div>
         )}
 
-        {/* Nav items */}
         <div style={{ flex: 1, overflowY: "auto", paddingTop: 12, paddingBottom: 8 }}>
           {navSections.map((section, si) => (
             <div key={si}>
@@ -137,7 +148,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
                     {showLabels && item.badge != null && (
                       <span style={{ background: "#7c3aed", color: "#fff", fontSize: 10, fontWeight: 700, padding: "0 5px", borderRadius: 99, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center" }}>{item.badge}</span>
                     )}
-                    {/* Tooltip for collapsed sidebar */}
                     {!showLabels && (
                       <span className="absolute left-full ml-2 px-2.5 py-1.5 bg-[#1e1b4b] text-white text-[11px] font-semibold rounded-md whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-none z-[100]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.3)" }}>
                         {item.label}
@@ -150,7 +160,6 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
           ))}
         </div>
 
-        {/* + Button / collapse toggle */}
         {!isMobile && (
           <div style={{ padding: "8px 12px 16px" }}>
             <button
