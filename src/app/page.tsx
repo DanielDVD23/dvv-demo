@@ -29,12 +29,16 @@ import Kalender from "@/components/screens/Kalender";
 import Strafen from "@/components/screens/Strafen";
 import Mail from "@/components/screens/Mail";
 import Spielplan from "@/components/screens/Spielplan";
-import HelpPanel from "@/components/HelpPanel";
+import KnowledgeBase from "@/components/screens/KnowledgeBase";
+import ChatWidget from "@/components/ChatWidget";
+import GuidedTour from "@/components/GuidedTour";
+import HelperTooltip from "@/components/ui/HelperTooltip";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
 import { roleConfigs } from "@/config/roles";
 import type { Role } from "@/types/roles";
+import tooltipContent from "@/data/tooltipContent.json";
 
 function EmptyScreen({ title, subtitle, icon }: { title: string; subtitle: string; icon: string }) {
   return (
@@ -251,14 +255,14 @@ function TeamDetail({ teamName, onBack }: { teamName: string; onBack: () => void
       <Modal open={addModal} onClose={() => setAddModal(false)} title="Spielerin melden">
         <div className="grid grid-cols-2 gap-3.5 mb-3.5">
           <div className="col-span-2"><label className={labelCls}>Name *</label><input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} placeholder="Vor- und Nachname" /></div>
-          <div><label className={labelCls}>Trikotnummer *</label><input type="number" min={1} max={99} value={form.nr || ""} onChange={e => setForm(p => ({ ...p, nr: parseInt(e.target.value) || 0 }))} /></div>
-          <div><label className={labelCls}>Position *</label>
+          <div><label className={labelCls}>Trikotnummer * <HelperTooltip content={tooltipContent.screens.mannschaft.trikotnummer} /></label><input type="number" min={1} max={99} value={form.nr || ""} onChange={e => setForm(p => ({ ...p, nr: parseInt(e.target.value) || 0 }))} /></div>
+          <div><label className={labelCls}>Position * <HelperTooltip content={tooltipContent.screens.mannschaft.position} /></label>
             <select value={form.position} onChange={e => setForm(p => ({ ...p, position: e.target.value }))}>
               {POSITIONS.map(pos => <option key={pos}>{pos}</option>)}
             </select>
           </div>
-          <div><label className={labelCls}>Geburtsdatum</label><input value={form.geburtsdatum} onChange={e => setForm(p => ({ ...p, geburtsdatum: e.target.value }))} placeholder="TT.MM.JJJJ" /></div>
-          <div><label className={labelCls}>Pass-Nr.</label><input value={form.passNr} onChange={e => setForm(p => ({ ...p, passNr: e.target.value }))} placeholder="Wird automatisch vergeben" /></div>
+          <div><label className={labelCls}>Geburtsdatum <HelperTooltip content={tooltipContent.screens.mannschaft.geburtsdatum} /></label><input value={form.geburtsdatum} onChange={e => setForm(p => ({ ...p, geburtsdatum: e.target.value }))} placeholder="TT.MM.JJJJ" /></div>
+          <div><label className={labelCls}>Pass-Nr. <HelperTooltip content={tooltipContent.screens.mannschaft.passNr} /></label><input value={form.passNr} onChange={e => setForm(p => ({ ...p, passNr: e.target.value }))} placeholder="Wird automatisch vergeben" /></div>
         </div>
         <div className="flex gap-2 mt-4">
           <Button variant="ghost" className="flex-1" onClick={() => setAddModal(false)}>Abbrechen</Button>
@@ -270,19 +274,19 @@ function TeamDetail({ teamName, onBack }: { teamName: string; onBack: () => void
       <Modal open={editModal} onClose={() => { setEditModal(false); setEditIdx(null); }} title={`${form.name} bearbeiten`}>
         <div className="grid grid-cols-2 gap-3.5 mb-3.5">
           <div className="col-span-2"><label className={labelCls}>Name *</label><input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} /></div>
-          <div><label className={labelCls}>Trikotnummer *</label><input type="number" min={1} max={99} value={form.nr || ""} onChange={e => setForm(p => ({ ...p, nr: parseInt(e.target.value) || 0 }))} /></div>
-          <div><label className={labelCls}>Position *</label>
+          <div><label className={labelCls}>Trikotnummer * <HelperTooltip content={tooltipContent.screens.mannschaft.trikotnummer} /></label><input type="number" min={1} max={99} value={form.nr || ""} onChange={e => setForm(p => ({ ...p, nr: parseInt(e.target.value) || 0 }))} /></div>
+          <div><label className={labelCls}>Position * <HelperTooltip content={tooltipContent.screens.mannschaft.position} /></label>
             <select value={form.position} onChange={e => setForm(p => ({ ...p, position: e.target.value }))}>
               {POSITIONS.map(pos => <option key={pos}>{pos}</option>)}
             </select>
           </div>
-          <div><label className={labelCls}>Geburtsdatum</label><input value={form.geburtsdatum || ""} onChange={e => setForm(p => ({ ...p, geburtsdatum: e.target.value }))} /></div>
-          <div><label className={labelCls}>Status</label>
+          <div><label className={labelCls}>Geburtsdatum <HelperTooltip content={tooltipContent.screens.mannschaft.geburtsdatum} /></label><input value={form.geburtsdatum || ""} onChange={e => setForm(p => ({ ...p, geburtsdatum: e.target.value }))} /></div>
+          <div><label className={labelCls}>Status <HelperTooltip content={tooltipContent.screens.mannschaft.status} /></label>
             <select value={form.status} onChange={e => setForm(p => ({ ...p, status: e.target.value }))}>
               {STATUS_OPTS.map(s => <option key={s}>{s}</option>)}
             </select>
           </div>
-          <div className="col-span-2"><label className={labelCls}>Pass-Nr.</label><input value={form.passNr || ""} onChange={e => setForm(p => ({ ...p, passNr: e.target.value }))} className="!bg-s2" /></div>
+          <div className="col-span-2"><label className={labelCls}>Pass-Nr. <HelperTooltip content={tooltipContent.screens.mannschaft.passNr} /></label><input value={form.passNr || ""} onChange={e => setForm(p => ({ ...p, passNr: e.target.value }))} className="!bg-s2" /></div>
         </div>
         <div className="flex gap-2 mt-4">
           <Button variant="ghost" className="flex-1" onClick={() => { setEditModal(false); setEditIdx(null); }}>Abbrechen</Button>
@@ -333,6 +337,12 @@ export default function App() {
   const [newModal, setNewModal] = useState(false);
   const [roleModal, setRoleModal] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
+  const [tourActive, setTourActive] = useState(false);
+  const [onboardingCompleted, setOnboardingCompleted] = useState<Record<Role, boolean>>({
+    staffelleitung: false,
+    clubadmin: false,
+    verbandsadmin: false,
+  });
 
   const config = roleConfigs[role];
   const crumbs = config.breadcrumbs[screen] || ["NWVV", screen];
@@ -341,6 +351,10 @@ export default function App() {
     setRole(r);
     setScreen(roleConfigs[r].defaultScreen);
     setRoleModal(false);
+    // Auto-start tour for new role if not completed
+    if (!onboardingCompleted[r]) {
+      setTimeout(() => setTourActive(true), 500);
+    }
   };
 
   return (
@@ -394,12 +408,13 @@ export default function App() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"><circle cx="7" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><circle cx="17" cy="17" r="3" /></svg>
             </button>
           </div>
-          <Button size="sm" className="hidden sm:inline-flex" onClick={() => setNewModal(true)}>+ Neu erstellen</Button>
+          <Button size="sm" className="hidden sm:inline-flex" onClick={() => setNewModal(true)} data-tour="new-button">+ Neu erstellen</Button>
           <div
             className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-medium text-white cursor-pointer shrink-0"
             style={{ background: "#794dff" }}
             onClick={() => setRoleModal(true)}
             title="Rolle wechseln"
+            data-tour="role-switcher"
           >
             {config.initials}
           </div>
@@ -408,13 +423,17 @@ export default function App() {
 
       {/* Below topbar: sidebar + content side by side */}
       <div className="flex-1 flex min-h-0 overflow-hidden">
-        <Sidebar active={screen} onNavigate={setScreen} navSections={config.navSections} mobileOpen={mobileNav} onMobileClose={() => setMobileNav(false)} />
+        <div data-tour="sidebar">
+          <Sidebar active={screen} onNavigate={setScreen} navSections={config.navSections} mobileOpen={mobileNav} onMobileClose={() => setMobileNav(false)} />
+        </div>
         <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-bg">
           {/* Breadcrumbs */}
           <Breadcrumbs items={screen.startsWith("team-detail:") ? [...(crumbs || ["NWVV"]), "Alle Mannschaften", decodeURIComponent(screen.replace("team-detail:", ""))] : crumbs} onNavigate={setScreen} />
+          <div data-tour="dashboard">
           {screen === "dashboard" && role === "staffelleitung" && <Dashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "clubadmin" && <ClubDashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "verbandsadmin" && <VerbandDashboard onNavigate={setScreen} />}
+          </div>
           {(screen === "ligen" || screen.startsWith("ligen:")) && <Ligen initialLiga={screen.startsWith("ligen:") ? screen.replace("ligen:", "") : undefined} />}
           {screen === "spieltag" && <Spieltag />}
           {screen === "spielplan" && <Spielplan onNavigate={setScreen} />}
@@ -437,6 +456,7 @@ export default function App() {
           {screen === "kalender" && <Kalender />}
           {screen === "kontakte" && <Kontakte />}
           {screen === "strafen" && <Strafen />}
+          {screen === "knowledge-base" && <KnowledgeBase role={role} onNavigate={setScreen} />}
         </div>
       </div>
 
@@ -484,8 +504,27 @@ export default function App() {
         </div>
       </Modal>
 
-      {/* Help Panel */}
-      <HelpPanel />
+      {/* Chat Widget (replaces HelpPanel) */}
+      <ChatWidget
+        userRole={role}
+        currentScreen={screen}
+        onNavigate={setScreen}
+        onStartTour={() => setTourActive(true)}
+      />
+
+      {/* Guided Tour Overlay */}
+      <GuidedTour
+        role={role}
+        active={tourActive}
+        onComplete={() => {
+          setTourActive(false);
+          setOnboardingCompleted((prev) => ({ ...prev, [role]: true }));
+        }}
+        onDismiss={() => {
+          setTourActive(false);
+          setOnboardingCompleted((prev) => ({ ...prev, [role]: true }));
+        }}
+      />
     </div>
   );
 }

@@ -1,0 +1,52 @@
+{
+  "screens": {
+    "mannschaft": {
+      "trikotnummer": "Die Trikotnummer muss eindeutig pro Mannschaft sein (1–99). Sie wird auf dem Spielberichtsbogen verwendet.",
+      "position": "Wähle die Hauptposition der Spielerin. Dies beeinflusst die Kader-Statistik, nicht die tatsächliche Aufstellung.",
+      "passNr": "Die Pass-Nummer wird automatisch vom System vergeben (Format: DVV-JJJJ-XXXX). Nur bei Vereinswechsel manuell ändern.",
+      "status": "Aktiv = spielberechtigt. Verletzt/Gesperrt = nicht einsetzbar. Inaktiv = abgemeldet vom Spielbetrieb.",
+      "geburtsdatum": "Das Geburtsdatum wird für die Altersklassen-Prüfung benötigt. Format: TT.MM.JJJJ.",
+      "aufstiegsbereitschaft": "Die Aufstiegsbereitschaft muss bei der Mannschaftsmeldung erklärt werden. Voraussetzung: Hallengröße und SR-Lizenzen."
+    },
+    "spieltag": {
+      "spieltag": "Ein Spieltag fasst alle Begegnungen einer Runde zusammen. Paarungen werden aus dem Nummernspielplan generiert.",
+      "ergebnis": "Beide Teams müssen das Ergebnis bestätigen. Bei Abweichungen wird der Staffelleiter benachrichtigt.",
+      "verlegung": "Verlegungen sind nur vor Fixierung des Spielplans möglich. Beide Teams müssen dem neuen Termin zustimmen.",
+      "wertung": "Bei Nicht-Antritt: automatische Wertung 0:3 / 0:75. Protest-Wertungen werden von der Staffelleitung entschieden."
+    },
+    "rechnungen": {
+      "rechnungstyp": "Standard = normale Rechnung. Gutschrift = Storno einer bestehenden Rechnung. SEPA = Lastschrifteinzug.",
+      "faelligkeit": "Das Fälligkeitsdatum bestimmt den Zeitpunkt des SEPA-Lastschrifteinzugs. Standard: 14 Tage nach Rechnungsdatum.",
+      "sepaMandat": "Vereine benötigen ein gültiges SEPA-Mandat für den Lastschrifteinzug. Ohne Mandat nur Überweisung möglich.",
+      "datevExport": "Exportiert Buchungsstapel im DATEV-kompatiblen Format. Unterstützt auch Lexware und sevdesk."
+    },
+    "strafen": {
+      "strafkategorie": "Die Kategorie bestimmt den Strafrahmen gemäß BSO §17. Ordnungsstrafen vs. Spielwertungen.",
+      "einspruch": "Einspruch innerhalb von 7 Tagen nach Zustellung möglich. Wird an die Rechtskommission weitergeleitet.",
+      "stornierung": "Offene Strafen können direkt storniert werden. Bereits abgerechnete erzeugen automatisch eine Gutschrift."
+    },
+    "veranstaltungen": {
+      "veranstaltungstyp": "Turnier, Lehrgang, Fortbildung oder Versammlung. Der Typ bestimmt die verfügbaren Felder und Workflows.",
+      "kapazitaet": "Maximale Teilnehmerzahl. Bei Überbuchung wird automatisch eine Warteliste aktiviert.",
+      "lizenzierung": "Bei Ausbildungslehrgängen können Lizenzen nach bestandener Prüfung automatisch ausgestellt werden.",
+      "anmeldung": "Öffentlich = Selbstanmeldung möglich. Geschlossen = nur per Einladung. Intern = nur Verbands-Mitarbeiter."
+    },
+    "heimspieltermine": {
+      "halle": "Die Heimhalle muss die Mindestanforderungen der Ligaordnung erfüllen (Feldgröße, Höhe, Zuschauer).",
+      "termin": "Heimspieltermine können nur geändert werden, solange der Spielplan nicht fixiert ist.",
+      "schiedsrichter": "Schiedsrichter werden automatisch vom System zugeteilt. Manuelle Zuteilung nur durch die Staffelleitung."
+    },
+    "mannschaften": {
+      "meldung": "Die Mannschaftsmeldung muss vor Ablauf der Frist erfolgen. Mindestanzahl Spieler beachten.",
+      "ligapraeferenz": "Gibt die gewünschte Liga an. Die endgültige Einteilung erfolgt durch den Verband nach Meldeschluss.",
+      "kadergroesse": "Mindest- und Höchstzahl variiert je nach Wettbewerb. U16: min. 7, max. 14 Spielerinnen."
+    }
+  },
+  "global": {
+    "bso": "BSO = Bundesspielordnung des DVV. Regelt den gesamten Spielbetrieb im deutschen Volleyball.",
+    "rebac": "Rollenbasierte Zugriffskontrolle. Bestimmt, welche Funktionen und Daten für deine Rolle sichtbar sind.",
+    "staffelleitung": "Die Staffelleitung verwaltet den Spielbetrieb einer Liga (Spielplan, Ergebnisse, Strafen).",
+    "clubadmin": "Der Club-Admin verwaltet die Vereinsdaten, Mannschaftsmeldungen und Finanzen eines Vereins.",
+    "verbandsadmin": "Der Verbandsadmin hat Zugriff auf alle Verbandsfunktionen inkl. Stammdaten und übergreifende Statistiken."
+  }
+}

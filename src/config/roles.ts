@@ -17,6 +17,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
           { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "knowledge-base", label: "Wissensdatenbank", icon: "book-open" },
         ],
       },
       {
@@ -54,6 +55,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       veranstaltung: ["NWVV", "Veranstaltung erstellen"],
       rechnungen: ["NWVV", "Rechnungen"],
       strafen: ["NWVV", "Meine Strafbescheide"],
+      "knowledge-base": ["NWVV", "Wissensdatenbank"],
     },
     newModalItems: [
       { icon: "calendar", name: "Spieltag verwalten", desc: "Spielplan bearbeiten, Verlegungen", border: "border-l-accent", nav: "spieltag" },
@@ -79,6 +81,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
           { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "knowledge-base", label: "Wissensdatenbank", icon: "book-open" },
         ],
       },
       {
@@ -117,6 +120,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       statistik: ["TSV Hannover", "Statistiken"],
       rechnungen: ["TSV Hannover", "Rechnungen"],
       strafen: ["TSV Hannover", "Strafen"],
+      "knowledge-base": ["TSV Hannover", "Wissensdatenbank"],
     },
     newModalItems: [
       { icon: "users", name: "Mannschaft erstellen", desc: "Neues Team anlegen & melden", border: "border-l-green", nav: "mannschaften", action: "open-create" },
@@ -142,6 +146,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
           { id: "kontakte", label: "Kontakte", icon: "book-open" },
+          { id: "knowledge-base", label: "Wissensdatenbank", icon: "book-open" },
         ],
       },
       {
@@ -184,6 +189,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
       veranstaltung: ["NWVV", "Veranstaltung erstellen"],
       rechnungen: ["NWVV", "Rechnungen"],
       strafen: ["NWVV", "Strafbescheide"],
+      "knowledge-base": ["NWVV", "Wissensdatenbank"],
     },
     newModalItems: [
       { icon: "trophy", name: "Veranstaltung erstellen", desc: "Turnier, Lehrgang, Versammlung", border: "border-l-accent", nav: "veranstaltung" },
