@@ -29,6 +29,8 @@ import Kalender from "@/components/screens/Kalender";
 import Strafen from "@/components/screens/Strafen";
 import Mail from "@/components/screens/Mail";
 import Spielplan from "@/components/screens/Spielplan";
+import MentorProfile from "@/components/screens/MentorProfile";
+import AdminLeague from "@/components/screens/AdminLeague";
 import HelpPanel from "@/components/HelpPanel";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
@@ -394,12 +396,22 @@ export default function App() {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"><circle cx="7" cy="7" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><circle cx="17" cy="17" r="3" /></svg>
             </button>
           </div>
+          {/* Streak Counter */}
+          <div
+            className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-full cursor-pointer hover:bg-white/10 transition-colors"
+            style={{ background: "rgba(245,158,11,0.15)" }}
+            onClick={() => setScreen("admin-league")}
+            title="Compliance Streak"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" /></svg>
+            <span className="text-[12px] font-bold text-[#f59e0b]">5</span>
+          </div>
           <Button size="sm" className="hidden sm:inline-flex" onClick={() => setNewModal(true)}>+ Neu erstellen</Button>
           <div
             className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-medium text-white cursor-pointer shrink-0"
             style={{ background: "#794dff" }}
-            onClick={() => setRoleModal(true)}
-            title="Rolle wechseln"
+            onClick={() => setScreen("mentor-profile")}
+            title="Mein Profil"
           >
             {config.initials}
           </div>
@@ -437,6 +449,8 @@ export default function App() {
           {screen === "kalender" && <Kalender />}
           {screen === "kontakte" && <Kontakte />}
           {screen === "strafen" && <Strafen />}
+          {screen === "mentor-profile" && <MentorProfile />}
+          {screen === "admin-league" && <AdminLeague onNavigate={setScreen} />}
         </div>
       </div>
 

@@ -25,6 +25,17 @@
   --color-blue: #2563eb;
   --color-blue-dim: rgba(37, 99, 235, 0.08);
 
+  /* ── Wiz-Red (Critical Path) ── */
+  --color-wiz-red: #ff2d55;
+  --color-wiz-red-dim: rgba(255, 45, 85, 0.08);
+  --color-wiz-red-glow: rgba(255, 45, 85, 0.25);
+
+  /* ── Gold / Gamification ── */
+  --color-gold: #f59e0b;
+  --color-gold-dim: rgba(245, 158, 11, 0.08);
+  --color-silver: #94a3b8;
+  --color-bronze: #d97706;
+
   /* ── Text ── */
   --color-text: #1e1b4b;
   --color-text-muted: #94a3b8;
@@ -77,3 +88,31 @@ select option { background: #ffffff; }
 
 .animate-fadeIn { animation: fadeIn .2s ease; }
 .animate-slideUp { animation: slideUp .2s ease; }
+
+/* Pulse glow for critical nodes */
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 var(--color-wiz-red-glow); } 50% { box-shadow: 0 0 16px 4px var(--color-wiz-red-glow); } }
+.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+
+/* Dash animation for pending connectors */
+@keyframes dashMove { to { stroke-dashoffset: -20; } }
+.animate-dash { animation: dashMove 1s linear infinite; }
+
+/* Confetti burst */
+@keyframes confettiFall { 0% { transform: translateY(-10px) rotate(0deg); opacity: 1; } 100% { transform: translateY(120px) rotate(720deg); opacity: 0; } }
+.animate-confetti { animation: confettiFall 1.5s ease-out forwards; }
+
+/* Progress bar fill */
+@keyframes progressFill { from { width: 0%; } }
+.animate-progress { animation: progressFill 0.6s ease-out; }
+
+/* Streak flame pulse */
+@keyframes flamePulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+.animate-flame { animation: flamePulse 1.5s ease-in-out infinite; }
+
+/* Shield success */
+@keyframes shieldPop { 0% { transform: scale(0.5); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+.animate-shield { animation: shieldPop 0.5s ease-out; }
+
+/* Slide in from right */
+@keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.animate-slideInRight { animation: slideInRight 0.3s ease-out; }

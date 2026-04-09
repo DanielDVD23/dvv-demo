@@ -14,6 +14,7 @@ export const roleConfigs: Record<Role, RoleConfig> = {
         label: "",
         items: [
           { id: "dashboard", label: "Dashboard", badge: 5, icon: "grid" },
+          { id: "admin-league", label: "Admin League", icon: "trophy" },
           { id: "mail", label: "Mail", icon: "mail" },
           { id: "kalender", label: "Kalender", icon: "calendar" },
           { id: "kontakte", label: "Kontakte", icon: "book-open" },
@@ -40,6 +41,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     ],
     breadcrumbs: {
       dashboard: ["NWVV", "Dashboard"],
+      "admin-league": ["NWVV", "Admin League"],
+      "mentor-profile": ["NWVV", "Mein Profil"],
       mail: ["NWVV", "Mail"],
       kalender: ["NWVV", "Kalender"],
       kontakte: ["NWVV", "Kontakte"],
@@ -106,6 +109,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     ],
     breadcrumbs: {
       dashboard: ["TSV Hannover", "Dashboard"],
+      "admin-league": ["TSV Hannover", "Admin League"],
+      "mentor-profile": ["TSV Hannover", "Mein Profil"],
       mail: ["TSV Hannover", "Mail"],
       kalender: ["TSV Hannover", "Kalender"],
       kontakte: ["TSV Hannover", "Kontakte"],
@@ -171,6 +176,8 @@ export const roleConfigs: Record<Role, RoleConfig> = {
     ],
     breadcrumbs: {
       dashboard: ["NWVV", "Dashboard"],
+      "admin-league": ["NWVV", "Admin League"],
+      "mentor-profile": ["NWVV", "Mein Profil"],
       mail: ["NWVV", "Mail"],
       kalender: ["NWVV", "Kalender"],
       kontakte: ["NWVV", "Kontakte"],
