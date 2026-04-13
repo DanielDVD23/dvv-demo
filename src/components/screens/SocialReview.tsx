@@ -164,7 +164,7 @@ export default function SocialReview() {
               ))}
             </div>
             <div className="flex gap-2 mt-4">
-              <Button size="sm" disabled title="Verbinde deinen Account">Jetzt posten</Button>
+              <Button size="sm" disabled>Jetzt posten</Button>
               <Button size="sm">Empfehlung ubernehmen</Button>
               <Button size="sm" variant="ghost">Manuell anpassen</Button>
             </div>

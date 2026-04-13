@@ -79,7 +79,7 @@ export default function Sidebar({ active, onNavigate, navSections = [], mobileOp
   const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({});
   const [flyoutSection, setFlyoutSection] = useState<number | null>(null);
   const flyoutRef = useRef<HTMLDivElement>(null);
-  const flyoutTimeout = useRef<ReturnType<typeof setTimeout>>();
+  const flyoutTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);

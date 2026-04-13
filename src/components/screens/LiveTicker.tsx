@@ -85,7 +85,7 @@ export default function LiveTicker({ onNavigate }: LiveTickerProps) {
               {m.live ? (
                 <Badge color="green"><span className="w-1.5 h-1.5 bg-green rounded-full animate-pulse-live inline-block mr-1" />LIVE</Badge>
               ) : (
-                <Badge color="gray">{m.startTime}</Badge>
+                <Badge color="gray">{m.serie}</Badge>
               )}
               <span className="text-[10px] text-text-muted">{m.halle.split(",")[0]}</span>
             </div>

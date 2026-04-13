@@ -30,8 +30,9 @@ const KB_ARTICLES = [
   { id: "ergebnis-erfassen", cat: "staffel", title: "Ergebnisse erfassen", snippet: "Ergebnisse nach dem Spieltag erfassen, bestätigen und freigeben.", tags: ["Ergebnis", "Spieltag"] },
 ];
 
-const CHAT_MESSAGES_INIT = [
-  { role: "bot" as const, text: "Hallo! Ich bin der beauOS Assistent. Wie kann ich dir helfen?" },
+type ChatMessage = { role: "bot" | "user"; text: string };
+const CHAT_MESSAGES_INIT: ChatMessage[] = [
+  { role: "bot", text: "Hallo! Ich bin der beauOS Assistent. Wie kann ich dir helfen?" },
 ];
 
 const SUGGESTED_ACTIONS = [
