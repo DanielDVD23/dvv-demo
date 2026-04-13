@@ -4,6 +4,7 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 const TOP_SCORER = [
   { name: "Benjamin Patch", verein: "BR Volleys", punkte: 312, asse: 42, blocks: 28, saison: "2025/26" },
@@ -49,7 +50,7 @@ export default function Spielanalyse() {
               <tr key={i} className="hover:bg-s2 cursor-pointer">
                 <td className="px-4 py-2.5 border-b border-border font-bold text-accent">{i + 1}</td>
                 <td className="px-4 py-2.5 border-b border-border font-semibold">{s.name}</td>
-                <td className="px-4 py-2.5 border-b border-border text-text-dim">{s.verein}</td>
+                <td className="px-4 py-2.5 border-b border-border text-text-dim"><span className="flex items-center gap-2"><ClubLogo name={s.verein} size={22} />{s.verein}</span></td>
                 <td className="px-4 py-2.5 border-b border-border font-bold text-[16px]">{s.punkte}</td>
                 <td className="px-4 py-2.5 border-b border-border">{s.asse}</td>
                 <td className="px-4 py-2.5 border-b border-border">{s.blocks}</td>
@@ -73,7 +74,7 @@ export default function Spielanalyse() {
           <tbody>
             {TEAM_STATS.map((t, i) => (
               <tr key={i} className="hover:bg-s2 cursor-pointer">
-                <td className="px-4 py-2.5 border-b border-border font-semibold">{t.team}</td>
+                <td className="px-4 py-2.5 border-b border-border font-semibold"><span className="flex items-center gap-2"><ClubLogo name={t.team} size={22} />{t.team}</span></td>
                 <td className="px-4 py-2.5 border-b border-border text-green font-semibold">{t.siege}</td>
                 <td className="px-4 py-2.5 border-b border-border text-red">{t.niederlagen}</td>
                 <td className="px-4 py-2.5 border-b border-border font-semibold">{t.satzquote}</td>

@@ -7,6 +7,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Modal from "@/components/ui/Modal";
 import Icon from "@/components/ui/Icon";
 import FilterBar from "@/components/ui/FilterBar";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface MannschaftenProps {
   onNavigate: (screen: string) => void;
@@ -15,14 +16,14 @@ interface MannschaftenProps {
 }
 
 const teams = [
-  { name: "TSV Hannover Herren 1", liga: "Verbandsliga Nord", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 14, spieltag: "8/22", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover Herren 2", liga: "Bezirksliga", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 12, spieltag: "7/22", status: "Meldung offen", statusColor: "orange" as const },
-  { name: "TSV Hannover Herren 3", liga: "Kreisliga", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 10, spieltag: "6/22", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover Damen 1", liga: "Verbandsliga Nord", geschlecht: "Damen", altersklasse: "Erwachsene", spieler: 13, spieltag: "8/22", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover Damen 2", liga: "Bezirksliga", geschlecht: "Damen", altersklasse: "Erwachsene", spieler: 11, spieltag: "7/22", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover U20 m", liga: "Bezirksliga Jugend", geschlecht: "Herren", altersklasse: "U20", spieler: 12, spieltag: "5/18", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover U18 w", liga: "Kreisliga Jugend", geschlecht: "Damen", altersklasse: "U18", spieler: 10, spieltag: "4/16", status: "Aktiv", statusColor: "green" as const },
-  { name: "TSV Hannover Senioren", liga: "Seniorenliga", geschlecht: "Herren", altersklasse: "Senioren", spieler: 9, spieltag: "3/12", status: "Inaktiv", statusColor: "gray" as const },
+  { name: "BERLIN RECYCLING Volleys Herren 1", liga: "Verbandsliga Nord", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 14, spieltag: "8/22", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys Herren 2", liga: "Bezirksliga", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 12, spieltag: "7/22", status: "Meldung offen", statusColor: "orange" as const },
+  { name: "BERLIN RECYCLING Volleys Herren 3", liga: "Kreisliga", geschlecht: "Herren", altersklasse: "Erwachsene", spieler: 10, spieltag: "6/22", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys Damen 1", liga: "Verbandsliga Nord", geschlecht: "Damen", altersklasse: "Erwachsene", spieler: 13, spieltag: "8/22", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys Damen 2", liga: "Bezirksliga", geschlecht: "Damen", altersklasse: "Erwachsene", spieler: 11, spieltag: "7/22", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys U20 m", liga: "Bezirksliga Jugend", geschlecht: "Herren", altersklasse: "U20", spieler: 12, spieltag: "5/18", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys U18 w", liga: "Kreisliga Jugend", geschlecht: "Damen", altersklasse: "U18", spieler: 10, spieltag: "4/16", status: "Aktiv", statusColor: "green" as const },
+  { name: "BERLIN RECYCLING Volleys Senioren", liga: "Seniorenliga", geschlecht: "Herren", altersklasse: "Senioren", spieler: 9, spieltag: "3/12", status: "Inaktiv", statusColor: "gray" as const },
 ];
 
 export default function Mannschaften({ onNavigate, action, onActionHandled }: MannschaftenProps) {
@@ -56,7 +57,7 @@ export default function Mannschaften({ onNavigate, action, onActionHandled }: Ma
       <div className="flex justify-between items-start mb-6">
         <div>
           <h1 className="text-[22px] font-bold mb-1">Meine Mannschaften</h1>
-          <p className="text-[13px] text-text-muted">Alle Teams des TSV Hannover im Überblick</p>
+          <p className="text-[13px] text-text-muted">Alle Teams der BERLIN RECYCLING Volleys im Überblick</p>
         </div>
         <Button onClick={() => setCreateModal(true)}>+ Neue Mannschaft</Button>
       </div>
@@ -107,7 +108,7 @@ export default function Mannschaften({ onNavigate, action, onActionHandled }: Ma
           <tbody>
             {filtered.map((t, i) => (
               <tr key={i} className="hover:bg-s2 cursor-pointer" onClick={() => onNavigate(`team-detail:${encodeURIComponent(t.name)}`)}>
-                <td className="px-3.5 py-3 border-b border-border font-semibold">{t.name}</td>
+                <td className="px-3.5 py-3 border-b border-border font-semibold"><span className="flex items-center gap-2"><ClubLogo name={t.name} size={22} />{t.name}</span></td>
                 <td className="px-3.5 py-3 border-b border-border">{t.liga}</td>
                 <td className="px-3.5 py-3 border-b border-border">{t.geschlecht}</td>
                 <td className="px-3.5 py-3 border-b border-border">{t.altersklasse}</td>
@@ -124,7 +125,7 @@ export default function Mannschaften({ onNavigate, action, onActionHandled }: Ma
       <Modal open={createModal} onClose={() => setCreateModal(false)} title="Neue Mannschaft erstellen">
         <div className="mb-3.5">
           <div className="text-xs font-semibold text-text-dim mb-1.5">Mannschaftsname *</div>
-          <input placeholder="z.B. TSV Hannover Herren 3" />
+          <input placeholder="z.B. BERLIN RECYCLING Volleys Herren 3" />
         </div>
         <div className="grid grid-cols-2 gap-3.5 mb-3.5">
           <div>

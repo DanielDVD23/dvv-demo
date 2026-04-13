@@ -7,10 +7,10 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 const KPI = [
-  { label: "Offene Forderungen", value: "€ 284.320", color: "text-blue", icon: "coin" },
-  { label: "Eingegangen (Monat)", value: "€ 1.247.890", color: "text-green", icon: "check" },
-  { label: "SEPA-Mandate aktiv", value: "3.847", color: "text-accent", icon: "file" },
-  { label: "Überfällig", value: "€ 42.180", color: "text-red", icon: "alert" },
+  { label: "Offene Forderungen", value: "€ 284.320", color: "text-blue", icon: "receipt" },
+  { label: "Eingegangen (Monat)", value: "€ 1.247.890", color: "text-green", icon: "trending-up" },
+  { label: "SEPA-Mandate aktiv", value: "3.847", color: "text-accent", icon: "credit-card" },
+  { label: "Überfällig", value: "€ 42.180", color: "text-red", icon: "clock" },
 ];
 
 const RECHNUNGEN = [

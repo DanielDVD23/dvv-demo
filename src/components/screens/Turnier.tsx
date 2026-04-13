@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import SectionHeader from "@/components/ui/SectionHeader";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 /* ── Heatmap data (Step 3) ── */
 const heatmapData = [
@@ -301,6 +302,7 @@ export default function Turnier() {
                     }`}>
                       {isSelected && <Icon name="check" size={12} className="text-white" />}
                     </div>
+                    <ClubLogo name={t.name} size={24} />
                     <div className="flex-1">
                       <div className="text-[13px] font-semibold">{t.name}</div>
                       <div className="text-[11px] text-text-muted">{t.bezirk} · {t.liga}</div>
@@ -322,6 +324,7 @@ export default function Turnier() {
                   {selectedTeams.map((name, i) => (
                     <div key={name} className="flex items-center gap-2 text-[13px] py-1.5 px-2 bg-s2 rounded">
                       <span className="text-[11px] text-text-muted font-bold w-5">{i + 1}.</span>
+                      <ClubLogo name={name} size={20} />
                       <span className="font-medium flex-1">{name}</span>
                       <button onClick={() => toggleTeam(name)} className="bg-transparent border-0 cursor-pointer text-text-muted hover:text-red transition-colors">
                         <Icon name="x" size={14} />

@@ -7,12 +7,12 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 const REPORTS = [
-  { name: "Mitgliederentwicklung", kategorie: "Mitglieder", letzterExport: "01.04.2026", format: "PDF", icon: "users" },
-  { name: "Lizenzquoten pro Verband", kategorie: "Lizenzen", letzterExport: "28.03.2026", format: "Excel", icon: "clipboard" },
-  { name: "Vereinsübersicht nach Bundesland", kategorie: "Mitglieder", letzterExport: "15.03.2026", format: "CSV", icon: "building" },
-  { name: "Spielbilanz Saison", kategorie: "Spielbetrieb", letzterExport: "07.04.2026", format: "PDF", icon: "volleyball" },
-  { name: "Finanzübersicht Quartal", kategorie: "Finanzen", letzterExport: "01.04.2026", format: "Excel", icon: "coin" },
-  { name: "Schiedsrichter-Einsatzstatistik", kategorie: "Spielbetrieb", letzterExport: "05.04.2026", format: "PDF", icon: "whistle" },
+  { name: "Mitgliederentwicklung", kategorie: "Mitglieder", letzterExport: "01.04.2026", format: "PDF", icon: "trending-up" },
+  { name: "Lizenzquoten pro Verband", kategorie: "Lizenzen", letzterExport: "28.03.2026", format: "Excel", icon: "shield-check" },
+  { name: "Vereinsübersicht nach Bundesland", kategorie: "Mitglieder", letzterExport: "15.03.2026", format: "CSV", icon: "map" },
+  { name: "Spielbilanz Saison", kategorie: "Spielbetrieb", letzterExport: "07.04.2026", format: "PDF", icon: "activity" },
+  { name: "Finanzübersicht Quartal", kategorie: "Finanzen", letzterExport: "01.04.2026", format: "Excel", icon: "euro" },
+  { name: "Schiedsrichter-Einsatzstatistik", kategorie: "Spielbetrieb", letzterExport: "05.04.2026", format: "PDF", icon: "target" },
 ];
 
 const kategorieColors: Record<string, "purple" | "blue" | "green" | "orange"> = {

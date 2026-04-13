@@ -8,6 +8,7 @@ import Modal from "@/components/ui/Modal";
 import KpiCard from "@/components/ui/KpiCard";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ExportDropdown from "@/components/ui/ExportDropdown";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface Verein {
   name: string;
@@ -26,47 +27,47 @@ interface Verein {
 }
 
 const vereine: Verein[] = [
-  { name: "TSV Hannover", vereinsNr: "NWVV-0012", bezirk: "Hannover", mannschaften: 4, mitglieder: 285, status: "Aktiv", anschrift: "Eilenriede 42, 30169 Hannover", kontaktEmail: "info@tsv-hannover.de", kontaktTel: "0511 / 12345",
+  { name: "BERLIN RECYCLING Volleys", vereinsNr: "NWVV-0012", bezirk: "Hannover", mannschaften: 4, mitglieder: 285, status: "Aktiv", anschrift: "Eilenriede 42, 30169 Hannover", kontaktEmail: "info@br-volleys.de", kontaktTel: "0511 / 12345",
     teams: [{ name: "Damen 1", liga: "Verbandsliga Nord", status: "Bestätigt" }, { name: "Herren 1", liga: "Verbandsliga Nord", status: "Bestätigt" }, { name: "Damen 2", liga: "Bezirksliga", status: "Bestätigt" }, { name: "Herren 2", liga: "Kreisliga", status: "Gemeldet" }],
     rechnungen: [{ nr: "RE-2026-0412", typ: "Liga-Beitrag", betrag: "€ 890", status: "Bezahlt" }, { nr: "RE-2026-0398", typ: "Veranstaltung", betrag: "€ 350", status: "Offen" }],
-    funktionaere: [{ name: "Thomas Weber", rolle: "1. Vorsitzender", email: "weber@tsv-hannover.de" }, { name: "Martina Schulz", rolle: "Geschäftsführerin", email: "schulz@tsv-hannover.de" }, { name: "Klaus Fischer", rolle: "Jugendwart", email: "fischer@tsv-hannover.de" }],
+    funktionaere: [{ name: "Thomas Weber", rolle: "1. Vorsitzender", email: "weber@br-volleys.de" }, { name: "Martina Schulz", rolle: "Geschäftsführerin", email: "schulz@br-volleys.de" }, { name: "Klaus Fischer", rolle: "Jugendwart", email: "fischer@br-volleys.de" }],
     strafen: [{ datum: "12.01.2026", tatbestand: "Verspätete Meldung (§ 8.3)", betrag: "€ 50", status: "Bezahlt" }] },
-  { name: "SVC Göttingen", vereinsNr: "NWVV-0034", bezirk: "Hannover", mannschaften: 3, mitglieder: 180, status: "Aktiv", anschrift: "Sporthalle Süd, 37075 Göttingen", kontaktEmail: "kontakt@svc-goettingen.de", kontaktTel: "0551 / 67890",
+  { name: "SSC Palmberg Schwerin", vereinsNr: "NWVV-0034", bezirk: "Hannover", mannschaften: 3, mitglieder: 180, status: "Aktiv", anschrift: "Sporthalle Süd, 37075 Göttingen", kontaktEmail: "kontakt@ssc-schwerin.de", kontaktTel: "0551 / 67890",
     teams: [{ name: "Damen 1", liga: "Bezirksliga", status: "Bestätigt" }, { name: "Herren 2", liga: "Bezirksliga", status: "In Prüfung" }],
     rechnungen: [{ nr: "RE-2026-0399", typ: "Liga-Beitrag", betrag: "€ 240", status: "Fällig" }],
-    funktionaere: [{ name: "Anna Becker", rolle: "1. Vorsitzende", email: "becker@svc-goe.de" }],
+    funktionaere: [{ name: "Anna Becker", rolle: "1. Vorsitzende", email: "becker@ssc-schwerin.de" }],
     strafen: [] },
-  { name: "MTV Wolfsburg", vereinsNr: "NWVV-0056", bezirk: "Braunschweig", mannschaften: 2, mitglieder: 145, status: "Aktiv", anschrift: "Haupthalle, 38440 Wolfsburg", kontaktEmail: "info@mtv-wolfsburg.de", kontaktTel: "05361 / 11111",
+  { name: "VfB Friedrichshafen", vereinsNr: "NWVV-0056", bezirk: "Braunschweig", mannschaften: 2, mitglieder: 145, status: "Aktiv", anschrift: "Haupthalle, 38440 Wolfsburg", kontaktEmail: "info@vfb-friedrichshafen.de", kontaktTel: "05361 / 11111",
     teams: [{ name: "Herren 1", liga: "Verbandsliga Nord", status: "Bestätigt" }],
     rechnungen: [{ nr: "RE-2026-0401", typ: "Veranstaltung", betrag: "€ 925", status: "Offen" }],
-    funktionaere: [{ name: "Peter Müller", rolle: "1. Vorsitzender", email: "mueller@mtv-wob.de" }],
+    funktionaere: [{ name: "Peter Müller", rolle: "1. Vorsitzender", email: "mueller@vfb-friedrichshafen.de" }],
     strafen: [{ datum: "05.02.2026", tatbestand: "Nicht-Antritt (§ 14.1)", betrag: "€ 75", status: "Offen" }] },
-  { name: "VfR Bielefeld", vereinsNr: "NWVV-0078", bezirk: "Weser-Ems", mannschaften: 2, mitglieder: 120, status: "Aktiv", anschrift: "Am Sportpark 1, 33602 Bielefeld", kontaktEmail: "info@vfr-bielefeld.de", kontaktTel: "0521 / 22222",
+  { name: "Allianz MTV Stuttgart", vereinsNr: "NWVV-0078", bezirk: "Weser-Ems", mannschaften: 2, mitglieder: 120, status: "Aktiv", anschrift: "Am Sportpark 1, 33602 Bielefeld", kontaktEmail: "info@allianz-mtv-stuttgart.de", kontaktTel: "0521 / 22222",
     teams: [{ name: "Damen 1", liga: "Verbandsliga Süd", status: "Bestätigt" }],
-    rechnungen: [], funktionaere: [{ name: "Sabine Lang", rolle: "1. Vorsitzende", email: "lang@vfr-bi.de" }], strafen: [] },
-  { name: "SVC Wolfsburg", vereinsNr: "NWVV-0089", bezirk: "Braunschweig", mannschaften: 1, mitglieder: 95, status: "Aktiv", anschrift: "Nebenplatz 3, 38440 Wolfsburg", kontaktEmail: "info@svc-wolfsburg.de", kontaktTel: "05361 / 33333",
+    rechnungen: [], funktionaere: [{ name: "Sabine Lang", rolle: "1. Vorsitzende", email: "lang@allianz-mtv-stuttgart.de" }], strafen: [] },
+  { name: "Rote Raben Vilsbiburg", vereinsNr: "NWVV-0089", bezirk: "Braunschweig", mannschaften: 1, mitglieder: 95, status: "Aktiv", anschrift: "Nebenplatz 3, 38440 Wolfsburg", kontaktEmail: "info@rote-raben.de", kontaktTel: "05361 / 33333",
     teams: [{ name: "Damen 1", liga: "Bezirksliga", status: "Gemeldet" }],
     rechnungen: [{ nr: "RE-2026-0410", typ: "Liga-Beitrag", betrag: "€ 180", status: "Offen" }],
-    funktionaere: [{ name: "Martin Koch", rolle: "1. Vorsitzender", email: "koch@svc-wob.de" }], strafen: [] },
-  { name: "TV Hildesheim", vereinsNr: "NWVV-0091", bezirk: "Hannover", mannschaften: 1, mitglieder: 68, status: "Aktiv", anschrift: "Turnhalle Süd, 31134 Hildesheim", kontaktEmail: "info@tv-hildesheim.de", kontaktTel: "05121 / 44444",
+    funktionaere: [{ name: "Martin Koch", rolle: "1. Vorsitzender", email: "koch@rote-raben.de" }], strafen: [] },
+  { name: "NawaRo Straubing", vereinsNr: "NWVV-0091", bezirk: "Hannover", mannschaften: 1, mitglieder: 68, status: "Aktiv", anschrift: "Turnhalle Süd, 31134 Hildesheim", kontaktEmail: "info@nawaro-straubing.de", kontaktTel: "05121 / 44444",
     teams: [{ name: "Herren 1", liga: "Kreisliga", status: "Abgelehnt" }],
-    rechnungen: [], funktionaere: [{ name: "Hans Meier", rolle: "1. Vorsitzender", email: "meier@tv-hi.de" }], strafen: [] },
-  { name: "MTV Braunschweig", vereinsNr: "NWVV-0102", bezirk: "Braunschweig", mannschaften: 2, mitglieder: 155, status: "Aktiv", anschrift: "Hauptsporthalle, 38100 Braunschweig", kontaktEmail: "info@mtv-bs.de", kontaktTel: "0531 / 55555",
+    rechnungen: [], funktionaere: [{ name: "Hans Meier", rolle: "1. Vorsitzender", email: "meier@nawaro-straubing.de" }], strafen: [] },
+  { name: "SWD powervolleys Düren", vereinsNr: "NWVV-0102", bezirk: "Braunschweig", mannschaften: 2, mitglieder: 155, status: "Aktiv", anschrift: "Hauptsporthalle, 38100 Braunschweig", kontaktEmail: "info@powervolleys.de", kontaktTel: "0531 / 55555",
     teams: [{ name: "Herren 1", liga: "Bezirksliga Braunschweig", status: "In Prüfung" }],
     rechnungen: [{ nr: "RE-2026-0415", typ: "Liga-Beitrag", betrag: "€ 240", status: "Bezahlt" }],
-    funktionaere: [{ name: "Uwe Schmidt", rolle: "1. Vorsitzender", email: "schmidt@mtv-bs.de" }], strafen: [] },
-  { name: "SC Osnabrück", vereinsNr: "NWVV-0115", bezirk: "Weser-Ems", mannschaften: 1, mitglieder: 82, status: "Aktiv", anschrift: "Halle Nord, 49074 Osnabrück", kontaktEmail: "info@sc-os.de", kontaktTel: "0541 / 66666",
+    funktionaere: [{ name: "Uwe Schmidt", rolle: "1. Vorsitzender", email: "schmidt@powervolleys.de" }], strafen: [] },
+  { name: "VfL Oythe", vereinsNr: "NWVV-0115", bezirk: "Weser-Ems", mannschaften: 1, mitglieder: 82, status: "Aktiv", anschrift: "Halle Nord, 49074 Osnabrück", kontaktEmail: "info@vfl-oythe.de", kontaktTel: "0541 / 66666",
     teams: [{ name: "Herren 1", liga: "Kreisliga", status: "Gemeldet" }],
-    rechnungen: [], funktionaere: [{ name: "Petra Wagner", rolle: "1. Vorsitzende", email: "wagner@sc-os.de" }], strafen: [] },
-  { name: "TuS Göttingen", vereinsNr: "NWVV-0128", bezirk: "Hannover", mannschaften: 1, mitglieder: 72, status: "Aktiv", anschrift: "Sporthalle Ost, 37073 Göttingen", kontaktEmail: "info@tus-goe.de", kontaktTel: "0551 / 77777",
+    rechnungen: [], funktionaere: [{ name: "Petra Wagner", rolle: "1. Vorsitzende", email: "wagner@vfl-oythe.de" }], strafen: [] },
+  { name: "TV Rottenburg", vereinsNr: "NWVV-0128", bezirk: "Hannover", mannschaften: 1, mitglieder: 72, status: "Aktiv", anschrift: "Sporthalle Ost, 37073 Göttingen", kontaktEmail: "info@tv-rottenburg.de", kontaktTel: "0551 / 77777",
     teams: [{ name: "Mixed 1", liga: "Kreisliga Göttingen", status: "Bestätigt" }],
-    rechnungen: [], funktionaere: [{ name: "Karl Braun", rolle: "1. Vorsitzender", email: "braun@tus-goe.de" }], strafen: [] },
-  { name: "SC Paderborn", vereinsNr: "NWVV-0140", bezirk: "Weser-Ems", mannschaften: 1, mitglieder: 110, status: "Aktiv", anschrift: "Ahorn-Sportpark, 33098 Paderborn", kontaktEmail: "info@sc-pb.de", kontaktTel: "05251 / 88888",
+    rechnungen: [], funktionaere: [{ name: "Karl Braun", rolle: "1. Vorsitzender", email: "braun@tv-rottenburg.de" }], strafen: [] },
+  { name: "USC Münster", vereinsNr: "NWVV-0140", bezirk: "Weser-Ems", mannschaften: 1, mitglieder: 110, status: "Aktiv", anschrift: "Ahorn-Sportpark, 33098 Paderborn", kontaktEmail: "info@usc-muenster.de", kontaktTel: "05251 / 88888",
     teams: [{ name: "Damen 1", liga: "Verbandsliga Süd", status: "Bestätigt" }],
     rechnungen: [{ nr: "RE-2026-0420", typ: "Liga-Beitrag", betrag: "€ 420", status: "Bezahlt" }],
-    funktionaere: [{ name: "Eva Richter", rolle: "1. Vorsitzende", email: "richter@sc-pb.de" }], strafen: [] },
-  { name: "VfL Lüneburg", vereinsNr: "NWVV-0155", bezirk: "Hannover", mannschaften: 0, mitglieder: 45, status: "Inaktiv", anschrift: "Ilmenau-Halle, 21335 Lüneburg", kontaktEmail: "info@vfl-lueneburg.de", kontaktTel: "04131 / 99999",
-    teams: [], rechnungen: [], funktionaere: [{ name: "Dirk Vogel", rolle: "1. Vorsitzender", email: "vogel@vfl-lg.de" }], strafen: [] },
+    funktionaere: [{ name: "Eva Richter", rolle: "1. Vorsitzende", email: "richter@usc-muenster.de" }], strafen: [] },
+  { name: "SVG Lüneburg", vereinsNr: "NWVV-0155", bezirk: "Hannover", mannschaften: 0, mitglieder: 45, status: "Inaktiv", anschrift: "Ilmenau-Halle, 21335 Lüneburg", kontaktEmail: "info@svg-lueneburg.de", kontaktTel: "04131 / 99999",
+    teams: [], rechnungen: [], funktionaere: [{ name: "Dirk Vogel", rolle: "1. Vorsitzender", email: "vogel@svg-lueneburg.de" }], strafen: [] },
 ];
 
 const statusBadge = { "Aktiv": "green" as const, "Inaktiv": "gray" as const };
@@ -144,7 +145,12 @@ export default function Vereine({ onNavigate }: { onNavigate: (screen: string) =
           <tbody>
             {filtered.map((v, i) => (
               <tr key={i} className="hover:bg-s2 cursor-pointer transition-colors" onClick={() => { setSelectedVerein(v); setActiveTab("mannschaften"); }}>
-                <td className="px-3.5 py-3 border-b border-border font-semibold">{v.name}</td>
+                <td className="px-3.5 py-3 border-b border-border font-semibold">
+                  <div className="flex items-center gap-2.5">
+                    <ClubLogo name={v.name} size={28} />
+                    {v.name}
+                  </div>
+                </td>
                 <td className="px-3.5 py-3 border-b border-border text-text-muted">{v.vereinsNr}</td>
                 <td className="px-3.5 py-3 border-b border-border">{v.bezirk}</td>
                 <td className="px-3.5 py-3 border-b border-border font-bold">{v.mannschaften}</td>
@@ -161,7 +167,7 @@ export default function Vereine({ onNavigate }: { onNavigate: (screen: string) =
       </Card>
 
       {/* Detail Modal */}
-      <Modal open={!!selectedVerein} onClose={() => setSelectedVerein(null)} title={selectedVerein?.name || ""} large>
+      <Modal open={!!selectedVerein} onClose={() => setSelectedVerein(null)} title={selectedVerein ? <span className="flex items-center gap-2.5"><ClubLogo name={selectedVerein.name} size={28} />{selectedVerein.name}</span> : ""} large>
         {selectedVerein && (
           <div>
             {/* Club Header */}

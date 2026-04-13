@@ -20,6 +20,8 @@ import Nominierung from "@/components/screens/Nominierung";
 import Passkontrolle from "@/components/screens/Passkontrolle";
 import Mannschaften from "@/components/screens/Mannschaften";
 import Statistik from "@/components/screens/Statistik";
+import PlayerDashboardShell from "@/components/screens/PlayerDashboardShell";
+import CoachDashboardShell from "@/components/screens/CoachDashboardShell";
 import AlleLigen from "@/components/screens/AlleLigen";
 import AlleMannschaften from "@/components/screens/AlleMannschaften";
 import Vereine from "@/components/screens/Vereine";
@@ -56,6 +58,18 @@ import Lehrgaenge from "@/components/screens/Lehrgaenge";
 import Sponsoren from "@/components/screens/Sponsoren";
 import Shop from "@/components/screens/Shop";
 import VereinsMitglieder from "@/components/screens/VereinsMitglieder";
+import MatchDetail from "@/components/screens/MatchDetail";
+import Spielbericht from "@/components/screens/Spielbericht";
+import SpielerSelfService from "@/components/screens/SpielerSelfService";
+import SocialBriefing from "@/components/screens/SocialBriefing";
+import SocialReview from "@/components/screens/SocialReview";
+import MatchDayMaster from "@/components/screens/MatchDayMaster";
+import SupportCenter from "@/components/screens/SupportCenter";
+import ChatWidget from "@/components/ChatWidget";
+import DvvAnalytics from "@/components/screens/DvvAnalytics";
+import AeoAnalytics from "@/components/screens/AeoAnalytics";
+import WebPerformance from "@/components/screens/WebPerformance";
+import Staffelplanung from "@/components/screens/Staffelplanung";
 import Icon from "@/components/ui/Icon";
 import Badge from "@/components/ui/Badge";
 import Breadcrumbs from "@/components/ui/Breadcrumbs";
@@ -359,9 +373,63 @@ export default function App() {
   const [newModal, setNewModal] = useState(false);
   const [roleModal, setRoleModal] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [accountMenu, setAccountMenu] = useState(false);
 
   const config = roleConfigs[role];
-  const crumbs = config.breadcrumbs[screen] || [config.subtitle || "DVV", screen];
+  // Resolve drill-down screen IDs (team-detail:UUID, match-detail:UUID, ligen:UUID) to their parent
+  // so the breadcrumbs lookup uses a clean parent path instead of leaking the raw ID.
+  const parentScreen = screen.startsWith("team-detail:") ? "mannschaften"
+    : screen.startsWith("match-detail:") ? "live-ticker"
+    : screen.startsWith("ligen:") ? "ligen"
+    : screen;
+  const rawCrumbs = config.breadcrumbs[parentScreen] || config.breadcrumbs[screen] || [config.subtitle || "DVV", parentScreen];
+
+  // Build icon-enriched breadcrumbs (skip first level, only show 2nd + 3rd)
+  const screenIcon = config.navSections.flatMap(s => s.items).find(i => i.id === screen)?.icon;
+  const sectionIconMap: Record<string, string> = {};
+  for (const s of config.navSections) {
+    if (s.label) sectionIconMap[s.label] = s.items[0]?.icon || "";
+  }
+  // Map breadcrumb labels to navigable screen IDs
+  const labelToScreen: Record<string, string> = {};
+  for (const s of config.navSections) {
+    for (const item of s.items) {
+      labelToScreen[item.label] = item.id;
+    }
+  }
+  // Also map known section-level labels
+  for (const [screenId, crumbs] of Object.entries(config.breadcrumbs)) {
+    for (const crumb of crumbs) {
+      if (!labelToScreen[crumb]) {
+        // Check if this crumb label matches a nav item label
+        const found = config.navSections.flatMap(s => s.items).find(i => i.label === crumb);
+        if (found) labelToScreen[crumb] = found.id;
+      }
+    }
+  }
+  // Direct mappings for common drilldown parents
+  labelToScreen["Live-Ticker"] = "live-ticker";
+  labelToScreen["Spieltagsübersicht"] = "spieltag";
+  labelToScreen["Ligen"] = "liga-uebersicht";
+
+  const crumbsWithIcons = rawCrumbs.slice(1).map((label: string, i: number, arr: string[]) => ({
+    label,
+    icon: i === arr.length - 1 ? screenIcon : sectionIconMap[label],
+    onClick: i < arr.length - 1 && labelToScreen[label] ? () => setScreen(labelToScreen[label]) : undefined,
+  }));
+
+  // Map drilldown screens to their parent nav item for sidebar highlighting
+  const drilldownParent: Record<string, string> = {
+    "match-detail": "live-ticker",
+  };
+  const allNavIds = new Set(config.navSections.flatMap(s => s.items.map(i => i.id)));
+  const sidebarActiveScreen = allNavIds.has(screen)
+    ? screen
+    : screen.startsWith("team-detail:") ? "mannschaften"
+    : screen.startsWith("match-detail:") ? "live-ticker"
+    : screen.startsWith("ligen:") ? "ligen"
+    : drilldownParent[screen] || screen;
 
   const switchRole = (r: Role) => {
     setRole(r);
@@ -372,24 +440,43 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       {/* Topbar – responsive */}
-      <div className="flex items-center px-3 md:px-6 shrink-0 gap-2 md:gap-4 w-full" style={{ background: "#15153a", height: 56, minHeight: 56 }}>
+      <div className="flex items-center px-3 md:px-6 shrink-0 gap-2 md:gap-4 w-full" style={{ background: "#15153a", height: 76, minHeight: 76 }}>
         {/* Mobile hamburger */}
         <button className="md:hidden p-1.5 bg-transparent border-0 cursor-pointer shrink-0" onClick={() => setMobileNav(true)}>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
         </button>
 
-        {/* Left: Profile pill – matches sidebar width (240px / 60px) */}
-        <div
-          className="hidden md:flex items-center gap-3 px-4 py-1.5 rounded-lg cursor-pointer shrink-0 box-border"
-          style={{ background: "rgba(255,255,255,0.05)", width: 240, minWidth: 240 }}
-          onClick={() => setRoleModal(true)}
-        >
-          <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${config.gradient} flex items-center justify-center text-[10px] font-bold text-white shrink-0`}>{config.initials}</div>
-          <div className="min-w-0 flex-1">
-            <div className="text-white text-[13px] font-semibold truncate">{config.userName}</div>
-            <div className="text-[#f8f7fb] text-[12px] font-light truncate">{config.label}</div>
+        {/* Left: Profile pill + sidebar toggle — aligned with sidebar width */}
+        <div className="hidden md:flex items-center gap-3 shrink-0" style={{ width: sidebarCollapsed ? 84 : 304, minWidth: sidebarCollapsed ? 84 : 304, transition: "width 0.2s, min-width 0.2s" }}>
+          <div
+            className="flex items-center gap-3 rounded-lg cursor-pointer flex-1 min-w-0"
+            style={{ background: "rgba(255,255,255,0.05)", padding: sidebarCollapsed ? "10px" : "10px 16px", justifyContent: sidebarCollapsed ? "center" : "flex-start", transition: "padding 0.2s" }}
+            onClick={() => setRoleModal(true)}
+          >
+            <div className="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center shrink-0" style={{ background: "#794dff" }}>
+              <span className="text-[11px] font-bold text-white">{config.initials}</span>
+            </div>
+            {!sidebarCollapsed && (
+              <>
+                <div className="min-w-0 flex-1">
+                  <div className="text-white text-[14px] font-semibold truncate">{config.userName}</div>
+                  <div className="text-[#f8f7fb] text-[14px] font-light truncate">{config.label}</div>
+                </div>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" className="shrink-0"><polyline points="6 9 12 15 18 9" /></svg>
+              </>
+            )}
           </div>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" className="shrink-0"><polyline points="6 9 12 15 18 9" /></svg>
+          <button
+            className="p-1.5 bg-transparent border-0 cursor-pointer hover:bg-white/10 rounded transition-colors shrink-0"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            title={sidebarCollapsed ? "Sidebar einblenden" : "Sidebar ausblenden"}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 3v18" />
+              {sidebarCollapsed && <path d="M14 10l3 2-3 2" />}
+            </svg>
+          </button>
         </div>
 
         {/* Center: beauOS logo */}
@@ -400,7 +487,7 @@ export default function App() {
         {/* Right: Search, icons with tooltips, New, avatar */}
         <div className="flex items-center gap-1.5 md:gap-3 shrink-0">
           {/* Search bar - functional */}
-          <div className="hidden lg:flex items-center gap-1.5 border border-white/20 rounded-md px-3 h-[34px] focus-within:border-white/40 transition-colors cursor-text" style={{ width: 200 }} onClick={e => { const inp = e.currentTarget.querySelector("input"); inp?.focus(); }}>
+          <div className="hidden lg:flex items-center gap-1.5 border border-white/20 rounded-md px-3 h-[38px] focus-within:border-white/40 transition-colors cursor-text" style={{ width: 300 }} onClick={e => { const inp = e.currentTarget.querySelector("input"); inp?.focus(); }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="2"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
             <input placeholder="Suchen..." className="!bg-transparent !border-0 !outline-none !text-white !text-[13px] !w-full !h-auto !p-0 placeholder:!text-white/40" style={{ fontFamily: "inherit" }} />
           </div>
@@ -421,26 +508,74 @@ export default function App() {
             </button>
           </div>
           <Button size="sm" className="hidden sm:inline-flex" onClick={() => setNewModal(true)}>+ Neu erstellen</Button>
-          <div
-            className="w-[32px] h-[32px] rounded-full flex items-center justify-center text-[12px] font-medium text-white cursor-pointer shrink-0"
-            style={{ background: "#794dff" }}
-            onClick={() => setRoleModal(true)}
-            title="Rolle wechseln"
-          >
-            {config.initials}
+          {/* Account Avatar + Dropdown */}
+          <div className="relative">
+            <div
+              className="w-[38px] h-[38px] rounded-full flex items-center justify-center text-[14px] font-medium text-white cursor-pointer shrink-0 transition-all hover:ring-2 hover:ring-white/20"
+              style={{ background: "#794dff" }}
+              onClick={() => setAccountMenu(!accountMenu)}
+            >
+              {config.initials}
+            </div>
+            {accountMenu && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setAccountMenu(false)} />
+                <div className="absolute top-[calc(100%+8px)] right-0 bg-s1 border border-border rounded-xl shadow-lg min-w-[260px] z-50 overflow-hidden animate-fadeIn py-2">
+                  {/* Profile */}
+                  <div className="flex items-center gap-3 px-4 py-3">
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-[14px] font-semibold text-white shrink-0" style={{ background: "#794dff" }}>
+                      {config.initials}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[15px] font-semibold text-text truncate">{config.userName}</div>
+                      <div className="text-[13px] text-text-muted truncate">{config.userName.toLowerCase().replace(/\s/g, ".").replace(/[^a-z.]/g, "")}@dvv.de</div>
+                    </div>
+                  </div>
+                  <div className="mx-3 border-t border-border" />
+                  {/* Menu Items */}
+                  <div className="py-1 px-2">
+                    <button onClick={() => { setAccountMenu(false); }} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] text-text hover:bg-s2 transition-colors cursor-pointer text-left bg-transparent border-none bg-s2">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-muted shrink-0"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9"/></svg>
+                      Mein Konto
+                    </button>
+                    <button onClick={() => setAccountMenu(false)} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] text-text hover:bg-s2 transition-colors cursor-pointer text-left bg-transparent border-none">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-muted shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                      Hilfe-Center
+                    </button>
+                    <button onClick={() => setAccountMenu(false)} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] text-text hover:bg-s2 transition-colors cursor-pointer text-left bg-transparent border-none">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-text-muted shrink-0"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      DVV Website
+                    </button>
+                  </div>
+                  <div className="mx-3 border-t border-border" />
+                  {/* Sign Out */}
+                  <div className="py-1 px-2">
+                    <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-md text-[14px] text-red hover:bg-red-dim transition-colors cursor-pointer text-left bg-transparent border-none">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                      Abmelden
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
 
       {/* Below topbar: sidebar + content side by side */}
-      <div className="flex-1 flex min-h-0 overflow-hidden">
-        <Sidebar active={screen} onNavigate={setScreen} navSections={config.navSections} mobileOpen={mobileNav} onMobileClose={() => setMobileNav(false)} />
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 bg-bg">
+      <div className="flex-1 flex min-h-0 overflow-hidden p-6 gap-0" style={{ background: "#f6f5f9" }}>
+        <div className="shrink-0" style={{ width: sidebarCollapsed ? 84 : 276, transition: "width 0.2s" }}>
+          <div style={{ borderRadius: 12, overflow: "hidden", height: "100%" }}>
+            <Sidebar active={sidebarActiveScreen} onNavigate={setScreen} navSections={config.navSections} mobileOpen={mobileNav} onMobileClose={() => setMobileNav(false)} collapsed={sidebarCollapsed} onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)} />
+          </div>
+        </div>
+        <div className="flex-1 overflow-y-auto px-6 pt-0 pb-0">
           {/* Breadcrumbs */}
-          <Breadcrumbs items={screen.startsWith("team-detail:") ? [...(crumbs || ["NWVV"]), "Alle Mannschaften", decodeURIComponent(screen.replace("team-detail:", ""))] : crumbs} onNavigate={setScreen} />
+          <Breadcrumbs items={screen.startsWith("team-detail:") ? [...crumbsWithIcons, { label: decodeURIComponent(screen.replace("team-detail:", "")), icon: "users" }] : crumbsWithIcons} />
           {screen === "dashboard" && role === "staffelleitung" && <Dashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "clubadmin" && <ClubDashboard onNavigate={setScreen} />}
           {screen === "dashboard" && role === "verbandsadmin" && <VerbandDashboard onNavigate={setScreen} />}
+          {screen === "dashboard" && role === "socialmedia" && <VerbandDashboard onNavigate={setScreen} />}
           {(screen === "ligen" || screen.startsWith("ligen:")) && <Ligen initialLiga={screen.startsWith("ligen:") ? screen.replace("ligen:", "") : undefined} />}
           {screen === "spieltag" && <Spieltag />}
           {screen === "spielplan" && <Spielplan onNavigate={setScreen} />}
@@ -451,7 +586,11 @@ export default function App() {
           {screen === "alle-ligen" && <AlleLigen onNavigate={setScreen} />}
           {screen === "alle-mannschaften" && <AlleMannschaften onNavigate={setScreen} />}
           {screen === "vereine" && <Vereine onNavigate={setScreen} />}
-          {screen === "statistik" && <Statistik />}
+          {screen === "statistik" && role === "benutzer" && <PlayerDashboardShell />}
+          {screen === "statistik" && role === "clubadmin" && <CoachDashboardShell />}
+          {screen === "statistik" && role !== "benutzer" && role !== "clubadmin" && <Statistik />}
+          {screen === "player-stats" && <PlayerDashboardShell />}
+          {screen === "coach-stats" && <CoachDashboardShell />}
           {screen === "veranstaltung" && <Veranstaltung onNavigate={setScreen} />}
           {screen === "veranstaltungen" && <Veranstaltungen onNavigate={setScreen} />}
           {screen === "turnier" && <Turnier />}
@@ -477,7 +616,7 @@ export default function App() {
           {/* P1: Sportlicher Wettbewerb */}
           {screen === "liga-uebersicht" && <LigaUebersicht />}
           {screen === "spielplan-verwaltung" && <SpielplanVerwaltung />}
-          {screen === "live-ticker" && <LiveTicker />}
+          {screen === "live-ticker" && <LiveTicker onNavigate={setScreen} />}
           {screen === "beach-turniere" && <BeachTurniere />}
           {screen === "spielanalyse" && <Spielanalyse />}
           {/* P2: Verbandsorganisation */}
@@ -496,6 +635,20 @@ export default function App() {
           {screen === "shop" && <Shop />}
           {/* Verein */}
           {screen === "vereins-mitglieder" && <VereinsMitglieder />}
+          {/* Match Detail */}
+          {screen === "match-detail" && <MatchDetail />}
+          {/* Neue Feature-Screens */}
+          {screen === "spielbericht" && <Spielbericht />}
+          {screen === "spieler-self-service" && <SpielerSelfService />}
+          {screen === "social-briefing" && <SocialBriefing />}
+          {screen === "social-review" && <SocialReview />}
+          {screen === "matchday-master" && <MatchDayMaster />}
+          {screen === "support-center" && <SupportCenter onNavigate={setScreen} />}
+          {screen === "dvv-analytics" && <DvvAnalytics />}
+          {/* Analytics & KI */}
+          {screen === "aeo-analytics" && <AeoAnalytics />}
+          {screen === "web-performance" && <WebPerformance />}
+          {screen === "staffelplanung" && <Staffelplanung />}
         </div>
       </div>
 
@@ -543,8 +696,8 @@ export default function App() {
         </div>
       </Modal>
 
-      {/* Help Panel */}
-      <HelpPanel />
+      {/* Contextual Chat Widget — always visible */}
+      <ChatWidget currentScreen={screen} />
     </div>
   );
 }

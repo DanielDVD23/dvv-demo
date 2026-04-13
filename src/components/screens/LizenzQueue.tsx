@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
@@ -110,8 +110,8 @@ export default function LizenzQueue() {
           </thead>
           <tbody>
             {filtered.map(a => (
-              <>
-                <tr key={a.id} className={`hover:bg-s2 cursor-pointer ${a.wartezeit > 10 ? "status-bar-red" : ""} ${expanded === a.id ? "bg-s2" : ""}`} onClick={() => setExpanded(expanded === a.id ? null : a.id)}>
+              <React.Fragment key={a.id}>
+                <tr className={`hover:bg-s2 cursor-pointer ${a.wartezeit > 10 ? "status-bar-red" : ""} ${expanded === a.id ? "bg-s2" : ""}`} onClick={() => setExpanded(expanded === a.id ? null : a.id)}>
                   <td className="px-3 py-2.5 border-b border-border" onClick={e => e.stopPropagation()}>
                     <input type="checkbox" className="!w-4 !h-4" checked={selected.includes(a.id)} onChange={() => toggleSelect(a.id)} />
                   </td>
@@ -135,7 +135,7 @@ export default function LizenzQueue() {
                   </td>
                 </tr>
                 {expanded === a.id && (
-                  <tr key={`${a.id}-detail`}>
+                  <tr>
                     <td colSpan={9} className="px-6 py-4 bg-s2 border-b border-border">
                       <div className="animate-fadeIn grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -165,7 +165,7 @@ export default function LizenzQueue() {
                     </td>
                   </tr>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>

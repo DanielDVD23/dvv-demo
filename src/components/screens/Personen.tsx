@@ -5,6 +5,7 @@ import Card from "@/components/ui/Card";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface Person {
   id: string;
@@ -128,7 +129,7 @@ export default function Personen() {
                       </td>
                       <td className="px-3.5 py-2.5 border-b border-border font-mono text-[11px] text-text-muted">{p.dvvId}</td>
                       <td className="px-3.5 py-2.5 border-b border-border text-text-dim">
-                        {p.verein === "—" ? <Badge color="gray">Freie Mitgliedschaft</Badge> : p.verein}
+                        {p.verein === "—" ? <Badge color="gray">Freie Mitgliedschaft</Badge> : <span className="flex items-center gap-2"><ClubLogo name={p.verein} size={22} />{p.verein}</span>}
                       </td>
                       <td className="px-3.5 py-2.5 border-b border-border">
                         <div className="flex gap-1 flex-wrap">

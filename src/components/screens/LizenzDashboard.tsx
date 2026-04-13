@@ -7,10 +7,10 @@ import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 
 const KPI = [
-  { label: "Aktive Lizenzen", value: "42.847", change: "+312", color: "text-green", icon: "check" },
-  { label: "Neu beantragt", value: "128", change: "diese Woche", color: "text-blue", icon: "clipboard" },
-  { label: "Ablaufend (30 Tage)", value: "847", change: "Erinnerung?", color: "text-orange", icon: "alert" },
-  { label: "Gesperrt", value: "23", change: "3 neu", color: "text-red", icon: "shield" },
+  { label: "Aktive Lizenzen", value: "42.847", change: "+312", color: "text-green", icon: "shield-check" },
+  { label: "Neu beantragt", value: "128", change: "diese Woche", color: "text-blue", icon: "user-plus" },
+  { label: "Ablaufend (30 Tage)", value: "847", change: "Erinnerung?", color: "text-orange", icon: "clock" },
+  { label: "Gesperrt", value: "23", change: "3 neu", color: "text-red", icon: "ban" },
 ];
 
 const LANES = [

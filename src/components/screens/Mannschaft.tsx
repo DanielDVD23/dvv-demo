@@ -7,6 +7,7 @@ import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Modal from "@/components/ui/Modal";
 import SectionHeader from "@/components/ui/SectionHeader";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface Spielerin {
   name: string;
@@ -124,7 +125,7 @@ export default function Mannschaft({ action, onActionHandled }: { action?: strin
                 {meldungen.map((m, i) => (
                   <tr key={i} className={m.faded ? "opacity-50" : ""}>
                     <td className="px-3.5 py-3 border-b border-border"><strong>{m.mann}</strong></td>
-                    <td className="px-3.5 py-3 border-b border-border">{m.verein}</td>
+                    <td className="px-3.5 py-3 border-b border-border"><span className="flex items-center gap-2"><ClubLogo name={m.verein} size={22} />{m.verein}</span></td>
                     <td className="px-3.5 py-3 border-b border-border">{m.liga}</td>
                     <td className="px-3.5 py-3 border-b border-border">
                       {m.liga !== "–" && <Badge color={m.aufstieg ? "green" : "gray"}>{m.aufstieg ? "Ja" : "Nein"}</Badge>}

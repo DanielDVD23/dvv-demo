@@ -6,6 +6,7 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface ClubDashboardProps {
   onNavigate: (screen: string) => void;
@@ -70,10 +71,10 @@ export default function ClubDashboard({ onNavigate }: ClubDashboardProps) {
 
       {/* KPIs */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Gemeldete Spieler" value="42" sub="3 Meldungen ausstehend" color="green" onClick={() => onNavigate("spielermeldung")} />
-        <KpiCard label="Nächste Spiele" value="3" sub="in den nächsten 14 Tagen" color="purple" onClick={() => onNavigate("spielplan")} />
-        <KpiCard label="Offene Gebühren" value="€ 480" sub="2 Rechnungen offen" color="orange" onClick={() => onNavigate("rechnungen")} />
-        <KpiCard label="Aktive Teams" value="6" sub="4 Herren · 2 Damen" color="green" onClick={() => onNavigate("mannschaften")} />
+        <KpiCard label="Gemeldete Spieler" value="42" sub="3 Meldungen ausstehend" color="green" icon="users" onClick={() => onNavigate("spielermeldung")} />
+        <KpiCard label="Nächste Spiele" value="3" sub="in den nächsten 14 Tagen" color="purple" icon="calendar" onClick={() => onNavigate("spielplan")} />
+        <KpiCard label="Offene Gebühren" value="€ 480" sub="2 Rechnungen offen" color="orange" icon="euro" onClick={() => onNavigate("rechnungen")} />
+        <KpiCard label="Aktive Teams" value="6" sub="4 Herren · 2 Damen" color="green" icon="shield-check" onClick={() => onNavigate("mannschaften")} />
       </div>
 
       <div className="grid grid-cols-[1fr_340px] gap-5 min-w-0">
@@ -112,7 +113,7 @@ export default function ClubDashboard({ onNavigate }: ClubDashboardProps) {
                 {spiele.map((s, i) => (
                   <tr key={i} className="hover:bg-s2">
                     <td className="px-3.5 py-3 border-b border-border font-semibold">{s.mannschaft}</td>
-                    <td className="px-3.5 py-3 border-b border-border">{s.gegner}</td>
+                    <td className="px-3.5 py-3 border-b border-border"><span className="flex items-center gap-2"><ClubLogo name={s.gegner} size={22} />{s.gegner}</span></td>
                     <td className="px-3.5 py-3 border-b border-border">{s.datum}</td>
                     <td className="px-3.5 py-3 border-b border-border">{s.halle}</td>
                     <td className="px-3.5 py-3 border-b border-border"><Badge color={s.color}>{s.status}</Badge></td>
@@ -132,7 +133,7 @@ export default function ClubDashboard({ onNavigate }: ClubDashboardProps) {
               className={`bg-s2 border border-border rounded-[10px] p-4 cursor-pointer transition-all hover:bg-s3 hover:-translate-y-px border-l-[3px] ${team.borderColor} ${i > 0 ? "mt-2" : ""}`}
               onClick={() => onNavigate(`team-detail:${encodeURIComponent(team.name)}`)}
             >
-              <div className="text-sm font-bold mb-1">{team.name}</div>
+              <div className="text-sm font-bold mb-1 flex items-center gap-2"><ClubLogo name={team.name} size={22} />{team.name}</div>
               <div className="text-xs text-text-muted mb-2.5">{team.meta}</div>
               <div className="flex gap-1.5 flex-wrap">
                 {team.badges.map((b, j) => <Badge key={j} color={b.color}>{b.text}</Badge>)}

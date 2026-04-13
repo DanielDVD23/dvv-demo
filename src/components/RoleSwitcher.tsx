@@ -9,7 +9,7 @@ interface RoleSwitcherProps {
   onRoleChange: (role: Role) => void;
 }
 
-const roles: Role[] = ["staffelleitung", "clubadmin", "verbandsadmin"];
+const roles: Role[] = ["verbandsadmin", "staffelleitung", "clubadmin", "benutzer", "socialmedia"];
 
 export default function RoleSwitcher({ currentRole, onRoleChange }: RoleSwitcherProps) {
   const [open, setOpen] = useState(false);
