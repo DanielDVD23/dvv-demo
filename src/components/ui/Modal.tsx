@@ -13,7 +13,7 @@ export default function Modal({ open, onClose, title, children, large }: ModalPr
   return (
     <div className="fixed inset-0 bg-black/60 z-[1000] flex items-center justify-center" onClick={onClose}>
       <div
-        className={`bg-s1 border border-border rounded-[14px] p-7 max-w-[95vw] max-h-[90vh] overflow-y-auto animate-slideUp ${large ? "w-[720px]" : "w-[520px]"}`}
+        className={`bg-s1 border border-border rounded-[8px] p-7 max-w-[95vw] max-h-[90vh] overflow-y-auto animate-slideUp ${large ? "w-[720px]" : "w-[520px]"}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-5">

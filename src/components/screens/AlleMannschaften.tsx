@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import ExportDropdown from "@/components/ui/ExportDropdown";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface Team {
   mannschaft: string;
@@ -18,33 +19,33 @@ interface Team {
 
 const teams: Team[] = [
   // Verbandsliga
-  { mannschaft: "Herren 1", verein: "TSV Hannover", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "TSV Hannover", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 14, status: "Bestätigt" },
-  { mannschaft: "Herren 1", verein: "MTV Wolfsburg", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 13, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "VfR Bielefeld", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Herren 1", verein: "SC Paderborn", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "SC Paderborn", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 10, status: "Bestätigt" },
-  { mannschaft: "Herren 1", verein: "USC Braunschweig", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "VC Osnabrück", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "In Prüfung" },
+  { mannschaft: "Herren 1", verein: "BERLIN RECYCLING Volleys", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "BERLIN RECYCLING Volleys", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 14, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "VfB Friedrichshafen", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 13, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "Allianz MTV Stuttgart", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "USC Münster", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "USC Münster", liga: "Verbandsliga Süd", spielklasse: "Verbandsliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "BBSC Berlin", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "VC Wiesbaden", liga: "Verbandsliga Nord", spielklasse: "Verbandsliga", kaderstaerke: 11, status: "In Prüfung" },
   // Bezirksliga
-  { mannschaft: "Damen 1", verein: "SVC Göttingen", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
-  { mannschaft: "Herren 2", verein: "SVC Göttingen", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
-  { mannschaft: "Herren 1", verein: "MTV Braunschweig", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
-  { mannschaft: "Damen 2", verein: "TSV Hannover", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
-  { mannschaft: "Herren 2", verein: "TSV Hannover", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "SVC Wolfsburg", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Gemeldet" },
-  { mannschaft: "Herren 1", verein: "TSV Hildesheim", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "TV Hildesheim", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Gemeldet" },
+  { mannschaft: "Damen 1", verein: "SSC Palmberg Schwerin", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 2", verein: "SSC Palmberg Schwerin", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
+  { mannschaft: "Herren 1", verein: "SWD powervolleys Düren", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 11, status: "In Prüfung" },
+  { mannschaft: "Damen 2", verein: "BERLIN RECYCLING Volleys", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Bestätigt" },
+  { mannschaft: "Herren 2", verein: "BERLIN RECYCLING Volleys", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "Rote Raben Vilsbiburg", liga: "Bezirksliga Nord", spielklasse: "Bezirksliga", kaderstaerke: 9, status: "Gemeldet" },
+  { mannschaft: "Herren 1", verein: "TV Dingolfing", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "NawaRo Straubing", liga: "Bezirksliga Süd", spielklasse: "Bezirksliga", kaderstaerke: 10, status: "Gemeldet" },
   // Kreisliga
-  { mannschaft: "Herren 1", verein: "TV Hildesheim", liga: "Kreisliga Hannover", spielklasse: "Kreisliga", kaderstaerke: 0, status: "Abgelehnt" },
-  { mannschaft: "Herren 1", verein: "SC Osnabrück", liga: "Kreisliga Osnabrück", spielklasse: "Kreisliga", kaderstaerke: 9, status: "Gemeldet" },
-  { mannschaft: "Mixed 1", verein: "TuS Göttingen", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 14, status: "Bestätigt" },
-  { mannschaft: "Damen 1", verein: "TuS Göttingen", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 8, status: "Bestätigt" },
+  { mannschaft: "Herren 1", verein: "NawaRo Straubing", liga: "Kreisliga Hannover", spielklasse: "Kreisliga", kaderstaerke: 0, status: "Abgelehnt" },
+  { mannschaft: "Herren 1", verein: "VfL Oythe", liga: "Kreisliga Osnabrück", spielklasse: "Kreisliga", kaderstaerke: 9, status: "Gemeldet" },
+  { mannschaft: "Mixed 1", verein: "TV Rottenburg", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 14, status: "Bestätigt" },
+  { mannschaft: "Damen 1", verein: "TV Rottenburg", liga: "Kreisliga Göttingen", spielklasse: "Kreisliga", kaderstaerke: 8, status: "Bestätigt" },
   // Jugend
-  { mannschaft: "U18 Herren", verein: "TSV Hannover", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 14, status: "Bestätigt" },
-  { mannschaft: "U18 Damen", verein: "SVC Göttingen", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 12, status: "Bestätigt" },
-  { mannschaft: "U16 Mixed", verein: "MTV Wolfsburg", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 15, status: "In Prüfung" },
-  { mannschaft: "U18 Herren", verein: "VfR Bielefeld", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 11, status: "Gemeldet" },
+  { mannschaft: "U18 Herren", verein: "BERLIN RECYCLING Volleys", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 14, status: "Bestätigt" },
+  { mannschaft: "U18 Damen", verein: "SSC Palmberg Schwerin", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 12, status: "Bestätigt" },
+  { mannschaft: "U16 Mixed", verein: "VfB Friedrichshafen", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 15, status: "In Prüfung" },
+  { mannschaft: "U18 Herren", verein: "Allianz MTV Stuttgart", liga: "Jugendliga", spielklasse: "Jugend", kaderstaerke: 11, status: "Gemeldet" },
 ];
 
 const statusColor = { "Bestätigt": "green" as const, "In Prüfung": "orange" as const, "Gemeldet": "blue" as const, "Abgelehnt": "red" as const };
@@ -123,7 +124,9 @@ export default function AlleMannschaften({ onNavigate }: { onNavigate: (screen: 
             {filtered.map((t, i) => (
               <tr key={i} className="hover:bg-s2 transition-colors">
                 <td className="px-3.5 py-3 border-b border-border font-semibold">{t.mannschaft}</td>
-                <td className="px-3.5 py-3 border-b border-border">{t.verein}</td>
+                <td className="px-3.5 py-3 border-b border-border">
+                  <div className="flex items-center gap-2"><ClubLogo name={t.verein} size={22} />{t.verein}</div>
+                </td>
                 <td className="px-3.5 py-3 border-b border-border"><span className="text-[11px] bg-s2 px-2 py-0.5 rounded text-text-muted">{t.liga}</span></td>
                 <td className="px-3.5 py-3 border-b border-border font-bold">{t.kaderstaerke || "–"}</td>
                 <td className="px-3.5 py-3 border-b border-border"><Badge color={statusColor[t.status]}>{t.status}</Badge></td>

@@ -6,6 +6,7 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface VerbandDashboardProps {
   onNavigate: (screen: string) => void;
@@ -72,10 +73,10 @@ export default function VerbandDashboard({ onNavigate }: VerbandDashboardProps) 
 
       {/* KPIs */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Aktive Ligen" value="24" sub="6 Verband · 12 Bezirk · 6 Kreis" color="purple" onClick={() => onNavigate("ligen")} />
-        <KpiCard label="Aktive Vereine" value="186" sub="+12 zur Vorsaison" color="green" onClick={() => onNavigate("alle-ligen")} />
-        <KpiCard label="Gemeldete Spieler" value="4.218" sub="2.340 Herren · 1.878 Damen" color="purple" onClick={() => onNavigate("mannschaft")} />
-        <KpiCard label="Einnahmen (Saison)" value="€ 84.5k" sub="€ 12.4k ausstehend" color="orange" onClick={() => onNavigate("rechnungen")} />
+        <KpiCard label="Aktive Ligen" value="24" sub="6 Verband · 12 Bezirk · 6 Kreis" color="purple" icon="layers" onClick={() => onNavigate("ligen")} />
+        <KpiCard label="Aktive Vereine" value="186" sub="+12 zur Vorsaison" color="green" icon="building" onClick={() => onNavigate("alle-ligen")} />
+        <KpiCard label="Gemeldete Spieler" value="4.218" sub="2.340 Herren · 1.878 Damen" color="purple" icon="users" onClick={() => onNavigate("mannschaft")} />
+        <KpiCard label="Einnahmen (Saison)" value="€ 84.5k" sub="€ 12.4k ausstehend" color="orange" icon="euro" onClick={() => onNavigate("rechnungen")} />
       </div>
 
       <div className="grid grid-cols-[1fr_340px] gap-5 min-w-0">
@@ -150,6 +151,7 @@ export default function VerbandDashboard({ onNavigate }: VerbandDashboardProps) 
           <SectionHeader title="Vereine mit Problemen" className="mt-3" />
           {problemVereine.map((v, i) => (
             <div key={i} className="bg-s2 border border-border rounded-[6px] px-3.5 py-3 mb-2 flex items-center gap-3">
+              <ClubLogo name={v.name} size={22} />
               <div className="flex-1">
                 <div className="text-[13px] font-semibold">{v.name}</div>
                 <div className="text-[11px] text-text-muted">{v.problem}</div>

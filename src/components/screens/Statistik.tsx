@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 import Badge from "@/components/ui/Badge";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Icon from "@/components/ui/Icon";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 const tabs = ["Sanktionen", "Aufschlag", "Spieler-Statistik", "Satz-Statistik"];
 
@@ -127,7 +128,7 @@ export default function Statistik() {
                 {sanktionenData.map((t, i) => (
                   <Fragment key={i}>
                     <tr className="hover:bg-s2 cursor-pointer" onClick={() => setExpandedTeam(expandedTeam === i ? null : i)}>
-                      <td className="px-3.5 py-3 border-b border-border font-semibold">{t.team}</td>
+                      <td className="px-3.5 py-3 border-b border-border font-semibold"><span className="flex items-center gap-2"><ClubLogo name={t.team} size={22} />{t.team}</span></td>
                       <td className="px-3.5 py-3 border-b border-border">
                         <span className="inline-flex items-center gap-1"><span className="w-3 h-4 rounded-sm bg-[#facc15] inline-block" /> {t.verwarnung}</span>
                       </td>
@@ -178,7 +179,7 @@ export default function Statistik() {
               <tbody>
                 {aufschlagData.sort((a, b) => b.asse - a.asse).map((t, i) => (
                   <tr key={i} className="hover:bg-s2">
-                    <td className="px-3.5 py-3 border-b border-border font-semibold">{t.team}</td>
+                    <td className="px-3.5 py-3 border-b border-border font-semibold"><span className="flex items-center gap-2"><ClubLogo name={t.team} size={22} />{t.team}</span></td>
                     <td className="px-3.5 py-3 border-b border-border text-green font-semibold">{t.asse}</td>
                     <td className="px-3.5 py-3 border-b border-border text-red font-semibold">{t.fehler}</td>
                     <td className="px-3.5 py-3 border-b border-border font-bold">{t.quote}</td>
@@ -213,7 +214,7 @@ export default function Statistik() {
                       }`}>{p.rang}</span>
                     </td>
                     <td className="px-3.5 py-3 border-b border-border font-semibold">{p.name}</td>
-                    <td className="px-3.5 py-3 border-b border-border text-text-dim">{p.team}</td>
+                    <td className="px-3.5 py-3 border-b border-border text-text-dim"><span className="flex items-center gap-2"><ClubLogo name={p.team} size={22} />{p.team}</span></td>
                     <td className="px-3.5 py-3 border-b border-border font-bold text-accent">{p.punkte}</td>
                     <td className="px-3.5 py-3 border-b border-border">{p.spiele}</td>
                     <td className="px-3.5 py-3 border-b border-border">{p.avg}</td>
@@ -242,7 +243,7 @@ export default function Statistik() {
                 {satzStats.map((t, i) => (
                   <tr key={i} className={`hover:bg-s2 ${i === 0 ? "font-semibold" : ""}`}>
                     <td className="px-3.5 py-3 border-b border-border text-text-muted">{i + 1}</td>
-                    <td className="px-3.5 py-3 border-b border-border font-semibold">{t.team}</td>
+                    <td className="px-3.5 py-3 border-b border-border font-semibold"><span className="flex items-center gap-2"><ClubLogo name={t.team} size={22} />{t.team}</span></td>
                     <td className="px-3.5 py-3 border-b border-border text-green">{t.gewonnen}</td>
                     <td className="px-3.5 py-3 border-b border-border text-red">{t.verloren}</td>
                     <td className="px-3.5 py-3 border-b border-border font-bold">{t.quote}</td>

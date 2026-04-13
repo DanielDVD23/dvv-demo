@@ -3,12 +3,14 @@ interface CardProps {
   className?: string;
   borderColor?: string;
   noPadding?: boolean;
+  onClick?: () => void;
 }
 
-export default function Card({ children, className = "", borderColor, noPadding }: CardProps) {
+export default function Card({ children, className = "", borderColor, noPadding, onClick }: CardProps) {
   return (
     <div
-      className={`bg-s1 border border-border rounded-[10px] ${noPadding ? "" : "p-5"} mb-4 ${borderColor ? `border-l-[3px] ${borderColor}` : ""} ${className}`}
+      onClick={onClick}
+      className={`bg-s1 border border-border rounded-[8px] ${noPadding ? "" : "p-5"} mb-4 ${borderColor ? `border-l-[4px] ${borderColor}` : ""} ${onClick ? "cursor-pointer" : ""} ${className}`}
     >
       {children}
     </div>

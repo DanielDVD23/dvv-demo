@@ -78,10 +78,10 @@ export default function Dashboard({ onNavigate }: DashboardProps) {
 
       {/* KPIs */}
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
-        <KpiCard label="Offene Rechnungen" value="3" sub="€ 1.240 ausstehend" color="red" onClick={() => onNavigate("rechnungen")} />
-        <KpiCard label="Ligenübersicht" value="2" sub="Verlegungsanträge offen" color="orange" onClick={() => onNavigate("spieltag")} />
-        <KpiCard label="Ergebnisse" value="5" sub="zu bestätigen" color="purple" onClick={() => onNavigate("spieltag")} />
-        <KpiCard label="Meldungen" value="18" sub="Mannschaften gemeldet" color="green" onClick={() => onNavigate("mannschaft")} />
+        <KpiCard label="Offene Rechnungen" value="3" sub="€ 1.240 ausstehend" color="red" icon="receipt" onClick={() => onNavigate("rechnungen")} />
+        <KpiCard label="Ligenübersicht" value="2" sub="Verlegungsanträge offen" color="orange" icon="layers" onClick={() => onNavigate("spieltag")} />
+        <KpiCard label="Ergebnisse" value="5" sub="zu bestätigen" color="purple" icon="clipboard" onClick={() => onNavigate("spieltag")} />
+        <KpiCard label="Meldungen" value="18" sub="Mannschaften gemeldet" color="green" icon="users" onClick={() => onNavigate("mannschaft")} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-5 min-w-0">

@@ -5,6 +5,7 @@ import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
 import Modal from "@/components/ui/Modal";
+import ClubLogo from "@/components/ui/ClubLogo";
 
 interface MailItem {
   sender: string;
@@ -20,11 +21,11 @@ interface MailItem {
 
 const mails: MailItem[] = [
   { sender: "NWVV Spielausschuss", email: "spielausschuss@nwvv.de", time: "10:24", timeLabel: "Heute, 10:24", subject: "Spielplan Änderung – Spieltag 9", preview: "Der Spieltag 9 der Verbandsliga Nord wird aufgrund von Hallenprob...", tag: { text: "Dringend", color: "red" }, unread: true, initials: "NS" },
-  { sender: "TSV Hannover", email: "verwaltung@tsv-hannover.de", time: "09:15", timeLabel: "Heute, 09:15", subject: "Verlegungsantrag Heimspiel 22.03.", preview: "Hiermit beantragen wir die Verlegung unseres Heimspiels am 22.03...", tag: { text: "Antrag", color: "orange" }, unread: true, initials: "TH" },
-  { sender: "MTV Wolfsburg", email: "info@mtv-wolfsburg.de", time: "Gestern", timeLabel: "Gestern, 16:42", subject: "Ergebnis Spieltag 8 – Bestätigung", preview: "Wir bestätigen das Ergebnis 3:1 gegen SC Paderborn vom Spieltag 8...", tag: null, unread: false, initials: "MW" },
-  { sender: "VfR Bielefeld", email: "damen@vfr-bielefeld.de", time: "Gestern", timeLabel: "Gestern, 14:08", subject: "Mannschaftsmeldung Damen II", preview: "Anbei die aktualisierte Mannschaftsmeldung für die Rückrunde. Bitt...", tag: { text: "Meldung", color: "purple" }, unread: true, initials: "VB" },
-  { sender: "SC Paderborn", email: "volleyball@sc-paderborn.de", time: "Mo", timeLabel: "Mo, 11:30", subject: "Anfrage: Schiedsrichter-Verfügbarkeit", preview: "Für den Spieltag 10 am 05.04. benötigen wir noch einen SR. Können...", tag: null, unread: false, initials: "SP" },
-  { sender: "SVC Göttingen", email: "vorstand@svc-goettingen.de", time: "Mo", timeLabel: "Mo, 09:05", subject: "Hallenbelegung Winterpause", preview: "Die Sporthalle steht ab Januar nur eingeschränkt zur Verfügung...", tag: null, unread: false, initials: "SG" },
+  { sender: "BERLIN RECYCLING Volleys", email: "verwaltung@br-volleys.de", time: "09:15", timeLabel: "Heute, 09:15", subject: "Verlegungsantrag Heimspiel 22.03.", preview: "Hiermit beantragen wir die Verlegung unseres Heimspiels am 22.03...", tag: { text: "Antrag", color: "orange" }, unread: true, initials: "BR" },
+  { sender: "VfB Friedrichshafen", email: "info@vfb-friedrichshafen.de", time: "Gestern", timeLabel: "Gestern, 16:42", subject: "Ergebnis Spieltag 8 – Bestätigung", preview: "Wir bestätigen das Ergebnis 3:1 gegen USC Münster vom Spieltag 8...", tag: null, unread: false, initials: "VF" },
+  { sender: "Allianz MTV Stuttgart", email: "damen@allianz-mtv-stuttgart.de", time: "Gestern", timeLabel: "Gestern, 14:08", subject: "Mannschaftsmeldung Damen II", preview: "Anbei die aktualisierte Mannschaftsmeldung für die Rückrunde. Bitt...", tag: { text: "Meldung", color: "purple" }, unread: true, initials: "AS" },
+  { sender: "USC Münster", email: "volleyball@usc-muenster.de", time: "Mo", timeLabel: "Mo, 11:30", subject: "Anfrage: Schiedsrichter-Verfügbarkeit", preview: "Für den Spieltag 10 am 05.04. benötigen wir noch einen SR. Können...", tag: null, unread: false, initials: "UM" },
+  { sender: "SSC Palmberg Schwerin", email: "vorstand@ssc-schwerin.de", time: "Mo", timeLabel: "Mo, 09:05", subject: "Hallenbelegung Winterpause", preview: "Die Sporthalle steht ab Januar nur eingeschränkt zur Verfügung...", tag: null, unread: false, initials: "SS" },
   { sender: "NWVV Finanzen", email: "finanzen@nwvv.de", time: "Fr", timeLabel: "Fr, 08:15", subject: "Rechnung #2026-042 – Strafgebühr", preview: "Die Strafgebühr für Ordnungswidrigkeit BSO §17 wurde fällig gest...", tag: { text: "Rechnung", color: "green" }, unread: false, initials: "NF" },
 ];
 
@@ -36,7 +37,7 @@ const tabs = [
 
 const empfaengerOptionen = [
   "Alle Vereinsadmins", "Alle Staffelleiter", "Alle Trainer", "Alle Schiedsrichter",
-  "TSV Hannover", "MTV Wolfsburg", "SVC Göttingen", "SC Paderborn", "VfR Bielefeld",
+  "BERLIN RECYCLING Volleys", "VfB Friedrichshafen", "SSC Palmberg Schwerin", "USC Münster", "Allianz MTV Stuttgart",
   "Verbandsliga Nord – Alle", "Bezirksliga Süd – Alle",
 ];
 
@@ -151,9 +152,7 @@ export default function Mail() {
 
           {/* Sender Info */}
           <div className="flex items-start gap-3 px-6 py-4 border-b border-border">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white text-[13px] font-bold shrink-0">
-              {selected.initials}
-            </div>
+            <ClubLogo name={selected.sender} size={36} />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className="text-[14px] font-semibold">{selected.sender}</span>
@@ -175,8 +174,8 @@ export default function Mail() {
               <p className="mb-4">
                 Aufgrund der eingeschränkten Hallenverfügbarkeit in Hannover (Maschseehalle ist wegen Sanierungsarbeiten bis 15.04. gesperrt) müssen folgende Partien verlegt werden:
               </p>
-              <p className="mb-1 font-semibold">• TSV Hannover vs. SVC Göttingen → Neuer Termin: 05.04.2026, Ersatzhalle IGS Roderbruch</p>
-              <p className="mb-4 font-semibold">• USC Braunschweig vs. MTV Wolfsburg → Termin bestätigt, keine Änderung</p>
+              <p className="mb-1 font-semibold">• BERLIN RECYCLING Volleys vs. SSC Palmberg Schwerin → Neuer Termin: 05.04.2026, Ersatzhalle IGS Roderbruch</p>
+              <p className="mb-4 font-semibold">• BBSC Berlin vs. VfB Friedrichshafen → Termin bestätigt, keine Änderung</p>
               <p className="mb-4">
                 Bitte bestätigen Sie die Verlegung bis spätestens 25.03.2026 über das beauOS-System unter Spieltagsplanung → Verlegungen.
               </p>

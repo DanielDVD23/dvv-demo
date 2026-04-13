@@ -1,4 +1,4 @@
-export type Role = "staffelleitung" | "clubadmin" | "verbandsadmin";
+export type Role = "staffelleitung" | "clubadmin" | "verbandsadmin" | "benutzer" | "socialmedia";
 
 export interface NavItem {
   id: string;

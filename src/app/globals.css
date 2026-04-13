@@ -34,8 +34,8 @@
   --color-topbar: #1a1440;
 
   /* ── Fonts ── */
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 }
 
 body {
@@ -74,6 +74,16 @@ select option { background: #ffffff; }
 /* Animations */
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse-live { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .animate-fadeIn { animation: fadeIn .2s ease; }
 .animate-slideUp { animation: slideUp .2s ease; }
+.animate-pulse-live { animation: pulse-live 2s ease-in-out infinite; }
+
+/* Status bar left border */
+.status-bar-green { border-left: 4px solid #16a34a; }
+.status-bar-red { border-left: 4px solid #ef4444; }
+.status-bar-orange { border-left: 4px solid #d97706; }
+.status-bar-blue { border-left: 4px solid #2563eb; }
+.status-bar-purple { border-left: 4px solid #7c3aed; }
+.status-bar-gray { border-left: 4px solid #94a3b8; }
